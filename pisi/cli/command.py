@@ -16,7 +16,7 @@ import optparse
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi.api
 import pisi.context as ctx
@@ -54,7 +54,7 @@ class Command(object):
         for name in l:
             commandcls = Command.cmd_dict[name]
             trans = gettext.translation('pisi', fallback=True)
-            summary = trans.ugettext(commandcls.__doc__).split('\n')[0]
+            summary = trans.gettext(commandcls.__doc__).split('\n')[0]
             name = commandcls.name[0]
             if commandcls.name[1]:
                 name += ' (%s)' % commandcls.name[1]

@@ -23,7 +23,6 @@ import string
 import struct
 import fnmatch
 import hashlib
-import statvfs
 import termios
 import operator
 import subprocess
@@ -32,7 +31,7 @@ import unicodedata
 import gettext
 from functools import reduce
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 class Singleton(type):
     def __init__(cls, name, bases, dict):
@@ -644,7 +643,7 @@ def strip_file(filepath, fileinfo, outpath):
 def partition_freespace(directory):
     """Return free space of given directory's partition."""
     st = os.statvfs(directory)
-    return st[statvfs.F_BSIZE] * st[statvfs.F_BFREE]
+    return st[os.fstatvfs.F_BSIZE] * st[os.fstatvfs.F_BFREE]
 
 ########################################
 # Package/Repository Related Functions #

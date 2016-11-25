@@ -46,6 +46,8 @@
 #tmp_dir = /var/pisi
 #kde_dir = /usr/kde/4
 #qt_dir = /usr/qt/4
+#kde5_dir =
+#qt5_dir =
 
 import os
 import re
@@ -54,7 +56,7 @@ import configparser
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 import pisi
 
