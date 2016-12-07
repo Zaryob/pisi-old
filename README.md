@@ -1,2 +1,3 @@
 # package-manager
-A package manager for Linux
+a pisi package manager fork
+
