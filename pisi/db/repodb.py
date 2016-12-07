@@ -15,7 +15,10 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.gettext
 
 import os
-import piksemel #we should use lxml
+
+#import piksemel #we should use lxml
+
+from lxml import etree
 
 import pisi
 import pisi.uri
