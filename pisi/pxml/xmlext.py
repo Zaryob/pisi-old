@@ -27,7 +27,8 @@ __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.gettext
 
 import pisi
-import piksemel as iks
+#import piksemel as iks
+from lxml import etrre
 
 parse = iks.parse
 newDocument = iks.newDocument
