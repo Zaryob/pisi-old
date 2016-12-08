@@ -19,7 +19,7 @@
  function names are mixedCase for compatibility with minidom,
  an 'old library'
 
- this implementation uses piksemel
+ this implementation uses xl.dom.minidom
 """
 
 import gettext
@@ -28,10 +28,10 @@ _ = __trans.gettext
 
 import pisi
 #import piksemel as iks
-from lxml import etrre
+import xml.dom.minidom as minidom
 
-parse = iks.parse
-newDocument = iks.newDocument
+parse = minidom.parse
+newDocument = minidom.DOMImplementation.createDocument
 
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
@@ -40,7 +40,7 @@ def getAllNodes(node, tagPath):
         return []
     nodeList = [node] # basis case
     for tag in tags:
-        results = [getTagByName(x, tag) for x in nodeList]
+        results = [getElementsByTagName(x, tag) for x in nodeList]
         nodeList = []
         for x in results:
             nodeList.extend(x)
@@ -51,18 +51,18 @@ def getAllNodes(node, tagPath):
 
 def getNodeAttribute(node, attrname):
     """get named attribute from DOM node"""
-    return node.getAttribute(attrname)
+    return node.hasAttributes(attrname)
 
 def setNodeAttribute(node, attrname, value):
     """get named attribute from DOM node"""
-    return node.setAttribute(attrname, value)
+    return node.createAttribute(attrname)
 
 def getChildElts(parent):
     """get only child elements"""
-    return [x for x in parent.tags()]
+    return [x for x in parent.documentElement()]
 
 def getTagByName(parent, childName):
-    return [x for x in parent.tags(childName)]
+    return [x for x in parent.getElementsByTagName(childName)]
 
 def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
@@ -73,7 +73,8 @@ def getNodeText(node, tagpath = ""):
     child = node.firstChild()
     if not child:
         return None
-    if child.type() == iks.DATA:
+    if child.type() == iks.DATA:#!!!!! look here !!!!!#
+
         # in any case, strip whitespaces...
         return child.data().strip()
     else:
@@ -165,4 +166,4 @@ def addText(node, tagpath, text):
     node.insertData(text)
 
 def newNode(node, tag):
-    return iks.newDocument(tag)
+    return newDocument(tag)
