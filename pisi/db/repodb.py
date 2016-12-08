@@ -16,9 +16,9 @@ _ = __trans.gettext
 
 import os
 
-#import piksemel #we should use lxml
-
-from lxml import etree
+#import piksemel #we should unse xml.dom.minidom
+import xml.dom
+import xml.dom.minidom as minidom
 
 import pisi
 import pisi.uri
@@ -97,8 +97,8 @@ class RepoOrder:
     def remove(self, repo_name):
         repo_doc = self._get_doc()
 
-        for r in repo_doc.tags("Repo"):
-            if r.getTagData("Name") == repo_name:
+        for r in repo_doc.getElementsByTagName("Repo"):
+            if r.getElemensByTagName("Name").childNodes.data() == repo_name:
                 r.hide()
 
         self._update(repo_doc)
@@ -123,9 +123,9 @@ class RepoOrder:
         if self._doc is None:
             repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
             if os.path.exists(repos_file):
-                self._doc = piksemel.parse(repos_file)
+                self._doc = minidom.parse(repos_file)
             else:
-                self._doc = piksemel.newDocument("REPOS")
+                self._doc = xml.dom.minidom.DOMImplementation.createDocument("REPOS")
 
         return self._doc
 
@@ -133,10 +133,10 @@ class RepoOrder:
         repo_doc = self._get_doc()
         order = {}
 
-        for r in repo_doc.tags("Repo"):
-            media = r.getTagData("Media")
-            name = r.getTagData("Name")
-            status = r.getTagData("Status")
+        for r in repo_doc.getElementsByTagName("Repo"):
+            media = r.getElementsByTagName("Media")[0].childNodes.data()
+            name = r.getElementsByTagName("Name")[0].childNodes.data()
+            status = r.getElementsByTagName("Status")[0].childNodes.data()
             order.setdefault(media, []).append(name)
 
         return order
