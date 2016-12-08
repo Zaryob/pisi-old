@@ -71,8 +71,8 @@ class RepoOrder:
     def set_status(self, repo_name, status):
         repo_doc = self._get_doc()
 
-        for r in repo_doc.tags("Repo"):
-            if r.getTagData("Name") == repo_name:
+        for r in repo_doc.getroot():
+            if r.("Name") == repo_name:
                 status_node = r.getTag("Status")
                 if status_node:
                     status_node.firstChild().hide()
@@ -123,9 +123,11 @@ class RepoOrder:
         if self._doc is None:
             repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
             if os.path.exists(repos_file):
-                self._doc = piksemel.parse(repos_file)
+		
+                self._doc = etree.parse(repos_file)
             else:
-                self._doc = piksemel.newDocument("REPOS")
+		rootag = etree.Element("REPOS")
+                self._doc = etree.ElementTree(rootag)
 
         return self._doc
 
@@ -133,7 +135,7 @@ class RepoOrder:
         repo_doc = self._get_doc()
         order = {}
 
-        for r in repo_doc.tags("Repo"):
+        for r in repo_doc.("Repo"):
             media = r.getTagData("Media")
             name = r.getTagData("Name")
             status = r.getTagData("Status")

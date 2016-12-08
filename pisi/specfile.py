@@ -18,12 +18,12 @@
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 # standard python modules
 import os.path
-import piksemel
-
+#import piksemel
+from lxml import etree
 # pisi modules
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml
@@ -422,12 +422,12 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
     def getSourceRelease(self):
         return self.history[0].release
 
-    def _set_i18n(self, tag, inst):
+    def _set_i18n(self, tags, inst):
         try:
-            for summary in tag.tags("Summary"):
-                inst.summary[summary.getAttribute("xml:lang")] = summary.firstChild().data()
-            for desc in tag.tags("Description"):
-                inst.description[desc.getAttribute("xml:lang")] = desc.firstChild().data()
+            for summary in tags.tag("Summary"):
+                inst.summary[summary.attrib("xml:lang")] = summary.getchildren()
+            for desc in tags.tag("Description"):
+                inst.description[desc.attrib("xml:lang")] = desc.gethildren()
         except AttributeError:
             raise Error(_("translations.xml file is badly formed."))
 
@@ -436,17 +436,17 @@ class SpecFile(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         if not os.path.exists(path):
             return
         try:
-            doc = piksemel.parse(path)
+            doc = etree.parse(path)
         except Exception as e:
             raise Error(_("File '%s' has invalid XML") % (path) )
 
-        if doc.getTag("Source").getTagData("Name") == self.source.name:
+        if doc.getchildren("Source").get("Name") == self.source.name:
             # Set source package translations
-            self._set_i18n(doc.getTag("Source"), self.source)
+            self._set_i18n(doc.get("Source"), self.source)
 
-        for pak in doc.tags("Package"):
+        for pak in doc.getchildren("Package"):
             for inst in self.packages:
-                if inst.name == pak.getTagData("Name"):
+                if inst.name == pak.get("Name"):
                     self._set_i18n(pak, inst)
                     break
 
