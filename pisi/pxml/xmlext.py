@@ -28,10 +28,10 @@ _ = __trans.gettext
 
 import pisi
 #import piksemel as iks
-from lxml import etree
+from lxml import etrre
 
-parse = etree.parse
-newDocument = etree.Element
+parse = iks.parse
+newDocument = iks.newDocument
 
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
@@ -49,20 +49,20 @@ def getAllNodes(node, tagPath):
             return []
     return nodeList
 
-#def getNodeAttribute(node, attrname):
-#    """get named attribute from DOM node"""
-#    return node.getAttribute(attrname)
-#
-#def setNodeAttribute(node, attrname, value):
-#    """get named attribute from DOM node"""
-#    return node.setAttribute(attrname, value)
+def getNodeAttribute(node, attrname):
+    """get named attribute from DOM node"""
+    return node.getAttribute(attrname)
+
+def setNodeAttribute(node, attrname, value):
+    """get named attribute from DOM node"""
+    return node.setAttribute(attrname, value)
 
 def getChildElts(parent):
     """get only child elements"""
-    return [x for x in parent.iterchildren()]
+    return [x for x in parent.tags()]
 
 def getTagByName(parent, childName):
-    return [x for x in parent.iterchildren(childName)]
+    return [x for x in parent.tags(childName)]
 
 def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
@@ -70,7 +70,7 @@ def getNodeText(node, tagpath = ""):
         node = getNode(node, tagpath)
         if not node:
             return None
-    child = node.getchildren()
+    child = node.firstChild()
     if not child:
         return None
     if child.type() == iks.DATA:
