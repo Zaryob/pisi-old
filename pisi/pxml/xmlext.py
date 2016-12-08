@@ -28,7 +28,7 @@ _ = __trans.gettext
 
 import pisi
 #import piksemel as iks
-from lxml import etrre
+from lxml import etree
 
 parse = iks.parse
 newDocument = iks.newDocument

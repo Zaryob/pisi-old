@@ -43,7 +43,7 @@ class XmlFile(object):
     def newDocument(self):
         """clear DOM"""
 	rootag = etree.Element(root.Tag)
-        self.doc = etree.ElementTree(self.root)
+        self.doc = etree.ElementTree(rootag)
 
     def unlink(self):
         """deallocate DOM structure"""
