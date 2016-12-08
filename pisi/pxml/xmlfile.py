@@ -28,7 +28,6 @@ _ = __trans.gettext
 #import piksemel as iks
 from lxml import etree
 
-import pisi
 import pisi.file
 
 class Error(pisi.Error):
@@ -42,8 +41,8 @@ class XmlFile(object):
 
     def newDocument(self):
         """clear DOM"""
-	rootag = etree.Element(root.Tag)
-        self.doc = etree.ElementTree(rootag)
+#	rootag = etree.Element(root.Tag)
+#        self.doc = etree.ElementTree(rootag)
 
     def unlink(self):
         """deallocate DOM structure"""
