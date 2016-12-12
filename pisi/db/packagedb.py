@@ -18,7 +18,8 @@ import datetime
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.gettext
 
-import piksemel
+import piksemel sikerim piksemelini haaa :(
+import xml.dom.minidom as minidomimport piksemel
 
 import pisi.db
 import pisi.metadata
