@@ -18,14 +18,8 @@ import datetime
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.gettext
 
-<<<<<<< HEAD
-import piksemel sikerim piksemelini haaa :(
-import xml.dom.minidom as minidomimport piksemel
-
-=======
 #import piksemel
 from lxml import etree
->>>>>>> littlebranch
 import pisi.db
 import pisi.metadata
 import pisi.dependency
@@ -58,40 +52,16 @@ class PackageDB(lazydb.LazyDB):
         self.rpdb = pisi.db.itembyrepo.ItemByRepo(self.__replaces)
 
     def __generate_replaces(self, doc):
-<<<<<<< HEAD
-        return [x.getTagData("Name") for x in doc.tags("Package") if x.getTagData("Replaces")]
-
-    def __generate_obsoletes(self, doc):
-        distribution = doc.getTag("Distribution")
-        obsoletes = distribution and distribution.getTag("Obsoletes")
-        src_repo = doc.getTag("SpecFile") is not None
-=======
         return [x.get("Name") for x in doc.getchildren("Package") if x.getchildren("Replaces")]
 
     def __generate_obsoletes(self, doc):
         distribution = doc.get("Distribution")
         obsoletes = distribution and distribution.get("Obsoletes")
         src_repo = doc.get("SpecFile") is not None
->>>>>>> littlebranch
 
         if not obsoletes or src_repo:
             return []
 
-<<<<<<< HEAD
-        return [x.firstChild().data() for x in obsoletes.tags("Package")]
-
-    def __generate_packages(self, doc):
-        return dict([(x.getTagData("Name"), gzip.zlib.compress(x.toString())) for x in doc.tags("Package")])
-
-    def __generate_revdeps(self, doc):
-        revdeps = {}
-        for node in doc.tags("Package"):
-            name = node.getTagData('Name')
-            deps = node.getTag('RuntimeDependencies')
-            if deps:
-                for dep in deps.tags("Dependency"):
-                    revdeps.setdefault(dep.firstChild().data(), set()).add((name, dep.toString()))
-=======
         return [x.getchildren() for x in obsoletes.tag("Package")]
 
     def __generate_packages(self, doc):
@@ -105,7 +75,6 @@ class PackageDB(lazydb.LazyDB):
             if deps:
                 for dep in deps.tag("Dependency"):
                     revdeps.setdefault(dep.getchildren().data(), set()).add((name, dep.tostring()))
->>>>>>> littlebranch
         return revdeps
 
     def has_package(self, name, repo=None):
@@ -157,27 +126,16 @@ class PackageDB(lazydb.LazyDB):
         return found
 
     def __get_version(self, meta_doc):
-<<<<<<< HEAD
-        history = meta_doc.getTag("History")
-        version = history.getTag("Update").getTagData("Version")
-        release = history.getTag("Update").getAttribute("release")
-=======
         history = meta_doc.tag("History")
         version = history.getchildren("Update").tag("Version")
         release = history.getchildren("Update").get("release", 'Unknown')
->>>>>>> littlebranch
 
         # TODO Remove None
         return version, release, None
 
     def __get_distro_release(self, meta_doc):
-<<<<<<< HEAD
-        distro = meta_doc.getTagData("Distribution")
-        release = meta_doc.getTagData("DistributionRelease")
-=======
         distro = meta_doc.get("Distribution")
         release = meta_doc.get("DistributionRelease")
->>>>>>> littlebranch
 
         return distro, release
 
@@ -185,22 +143,14 @@ class PackageDB(lazydb.LazyDB):
         if not self.has_package(name, repo):
             raise Exception(_('Package %s not found.') % name)
 
-<<<<<<< HEAD
-        pkg_doc = piksemel.parseString(self.pdb.get_item(name, repo))
-=======
         pkg_doc = etree.fromstring(self.pdb.get_item(name, repo))
->>>>>>> littlebranch
         return self.__get_version(pkg_doc) + self.__get_distro_release(pkg_doc)
 
     def get_version(self, name, repo):
         if not self.has_package(name, repo):
             raise Exception(_('Package %s not found.') % name)
 
-<<<<<<< HEAD
-        pkg_doc = piksemel.parseString(self.pdb.get_item(name, repo))
-=======
         pkg_doc = etree.parse(self.pdb.get_item(name, repo))
->>>>>>> littlebranch
         return self.__get_version(pkg_doc)
 
     def get_package_repo(self, name, repo=None):
@@ -221,19 +171,11 @@ class PackageDB(lazydb.LazyDB):
         packages = set()
         for repo in repodb.list_repos():
             doc = repodb.get_repo_doc(repo)
-<<<<<<< HEAD
-            for package in doc.tags("Package"):
-                if package.getTagData("IsA"):
-                    for node in package.tags("IsA"):
-                        if node.firstChild().data() == isa:
-                            packages.add(package.getTagData("Name"))
-=======
             for package in doc.getchildren("Package"):
                 if package.get("IsA"):
                     for node in package.tag("IsA"):
                         if node.iterchildren() == isa:
                             packages.add(package.get("Name"))
->>>>>>> littlebranch
         return list(packages)
 
     def get_rev_deps(self, name, repo=None):
@@ -243,16 +185,6 @@ class PackageDB(lazydb.LazyDB):
             return []
 
         rev_deps = []
-<<<<<<< HEAD
-        for pkg, dep in rvdb:
-            node = piksemel.parseString(dep)
-            dependency = pisi.dependency.Dependency()
-            dependency.package = node.firstChild().data()
-            if node.attributes():
-                attr = node.attributes()[0]
-                dependency.__dict__[attr] = node.getAttribute(attr)
-            rev_deps.append((pkg, dependency))
-=======
         #for pkg, dep in rvdb:
         #    node = etree.fromstring(dep).getroottree()
         #    dependency = pisi.dependency.Dependency()
@@ -261,7 +193,6 @@ class PackageDB(lazydb.LazyDB):
         #        attr = node.Element.attrib()
         #        dependency.__dict__[attr] = node.get(attr)
         #        rev_deps.append((pkg, dependency))
->>>>>>> littlebranch
         return rev_deps
 
     # replacesdb holds the info about the replaced packages (ex. gaim -> pidgin)
@@ -270,17 +201,10 @@ class PackageDB(lazydb.LazyDB):
 
         for pkg_name in self.rpdb.get_list_item():
             xml = self.pdb.get_item(pkg_name, repo)
-<<<<<<< HEAD
-            package = piksemel.parseString(xml)
-            replaces_tag = package.getTag("Replaces")
-            if replaces_tag:
-                for node in replaces_tag.tags("Package"):
-=======
             package = etree.parse(xml)
             replaces_tag = package.getchildren("Replaces")
             if replaces_tag:
                 for node in replaces_tag.tag("Package"):
->>>>>>> littlebranch
                     r = pisi.relation.Relation()
                     # XXX Is there a better way to do this?
                     r.decode(node, [])

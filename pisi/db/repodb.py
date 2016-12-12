@@ -16,14 +16,8 @@ _ = __trans.gettext
 
 import os
 
-<<<<<<< HEAD
-#import piksemel #we should unse xml.dom.minidom
-import xml.dom
-import xml.dom.minidom as minidom
-=======
 #import piksemel #we should use lxml
 import xml.dom.minidom
->>>>>>> littlebranch
 
 import pisi
 import pisi.uri
@@ -76,13 +70,8 @@ class RepoOrder:
     def set_status(self, repo_name, status):
         repo_doc = self._get_doc()
 
-<<<<<<< HEAD
-        for r in repo_doc.tags("Repo"):
-            if r.getTagData("Name") == repo_name:
-=======
         for r in repo_doc.getroot():
             if r.("Name") == repo_name:
->>>>>>> littlebranch
                 status_node = r.getTag("Status")
                 if status_node:
                     status_node.firstChild().hide()
@@ -107,13 +96,8 @@ class RepoOrder:
     def remove(self, repo_name):
         repo_doc = self._get_doc()
 
-<<<<<<< HEAD
-        for r in repo_doc.getElementsByTagName("Repo"):
-            if r.getElemensByTagName("Name").childNodes.data() == repo_name:
-=======
         for r in repo_doc.tags("Repo"):
             if r.getTagData("Name") == repo_name:
->>>>>>> littlebranch
                 r.hide()
 
         self._update(repo_doc)
@@ -138,17 +122,11 @@ class RepoOrder:
         if self._doc is None:
             repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
             if os.path.exists(repos_file):
-<<<<<<< HEAD
-                self._doc = minidom.parse(repos_file)
-            else:
-                self._doc = xml.dom.minidom.DOMImplementation.createDocument("REPOS")
-=======
 		
                 self._doc = etree.parse(repos_file)
             else:
 		rootag = etree.Element("REPOS")
                 self._doc = etree.ElementTree(rootag)
->>>>>>> littlebranch
 
         return self._doc
 
@@ -156,17 +134,10 @@ class RepoOrder:
         repo_doc = self._get_doc()
         order = {}
 
-<<<<<<< HEAD
-        for r in repo_doc.getElementsByTagName("Repo"):
-            media = r.getElementsByTagName("Media")[0].childNodes.data()
-            name = r.getElementsByTagName("Name")[0].childNodes.data()
-            status = r.getElementsByTagName("Status")[0].childNodes.data()
-=======
         for r in repo_doc.("Repo"):
             media = r.getTagData("Media")
             name = r.getTagData("Name")
             status = r.getTagData("Status")
->>>>>>> littlebranch
             order.setdefault(media, []).append(name)
 
         return order
@@ -278,13 +249,8 @@ class RepoDB(lazydb.LazyDB):
 
     def get_distribution_release(self, name):
         doc = self.get_repo_doc(name)
-<<<<<<< HEAD
-        distro = doc.getTag("Distribution")
-        return distro and distro.getTagData("Version")
-=======
         distro = doc.getElementsByTagName("Distribution")[0].childNodes.data
         return distro and distro.get("Version")
->>>>>>> littlebranch
 
     def check_distribution(self, name):
         if ctx.get_option('ignore_check'):

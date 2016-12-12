@@ -1,48 +1,6 @@
-<<<<<<< HEAD
-2016-12-11 Aquila Nipalensis <nipalensisaquila@gmail.com>
-	*Her gun biraz biraz yazmama ragmen hala yarim kalan
-	4 modul var 
-
-	*Debian dagitimi ile gelistirme yapiyorum cok sinir bozucu
-	pardus 2011 mi denesem :)
-
-	*Basim agriyor artik. Bugun xmlext ve repodb biraz
-	 elden gecti 1-2 modul duzeltilmeli. packagedb ise
-	duzenlendi
-
-	*Test yapacam ama bana engel oluyor bu Debian :(
-	python yollarina benim paketimin yolu eklenmiyor
-	python3/distpackages klasorune attim surekli paket
-	hatasi aldim bence en yakin zamanda bir LFS sart
-
-2016-12-10 Aquila Nipakensis <nipalensisisaquila@gmail.com>
-	*Baslarim ya lxml modulune. Usengeclik hic iyi degil
-	xml.dom.minidom kullanmaliyim. Yazdigim kodlar kabak
-	oluyor bu ne ya :( xml'i neresinden okuyorsa....
-
-2016-12-09 Aquila Nipalensis <nipalensisisaquila@gmail.com>
-	*Debian ile delirmece :( -- LFS yapip sistemi oturtana
-	kadar Debian kullanauim dedim lxmli yukleyene kadar
-	alnim catladi. Bu ne ya projeye bir girisemedik...
-
-2016-12-08 Aquila Nipalensis <nipalensisaquila@gmail.com>
-	*piksemel bagimliliklarini atmak icin ugrasiyorum
-	ama lxml kullanamiyorum en iyi yol xml.dom.minidom
-	bastan yazmam sart 
-
-	*Lxml kurmam lazim belki kurarsam xml.dom.minidom
-	kullanmaya useniyorum :)
-
-2016-12-06 Aquila Nipalensis <nipalensisaquila@gmail.com>
-	*xml dosyalarini okuyan moduller lxml ile yeniden 
-	yazilmaya baslandi
-
-2016-11-19 Aquila Nipalensis <nipalensisaquila@gmail.com>
-=======
 2016-12-06 Aquila Nipalensis <nipalensisaquila@gmail.com>
 	*xml dosyalarini okuyan moduller lxml ile yeniden yazilmaya baslandi
 
 2016:11:19 Aquila Nipalensis <nipalensisaquila@gmail.com>
->>>>>>> littlebranch
 	*Bitirilen pisi projesi Python3'e gecirilmeye baslandi
 

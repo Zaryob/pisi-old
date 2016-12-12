@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-<<<<<<< HEAD
-# Copyright (C) 2016, Aquila Nipalensis
-=======
 # Copyright (C) 2009, TUBITAK/UEKAE
->>>>>>> littlebranch
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -48,25 +44,6 @@ class GroupDB(lazydb.LazyDB):
 
     def __generate_components(self, doc):
         groups = {}
-<<<<<<< HEAD
-        components = doc.getElementsByTagName("Component")
-        for c in components:
-            groupobj = c.getElementsByTagName("Group")[0]
-            for group in groupobj:
-                nodes = group.childNodes
-                for node in nodes:
-                   if node.nodeType == node.TEXT_NODE:
-                       group = node.data
-                       if not group:
-                           group = "unknown"
-                       groups.setdefault(group, []).append(c.getElementsByTagName("Name").childNodes.data())
-        return groups
-
-    def __generate_groups(self, doc):
-        #return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Group")])
-        for x in doc.tags("Group"):
-             return dict([x.getElementsByTagName("Name").childNodes[].data, x.tostring()])
-=======
         for c in doc.tags("Component"):
             group = c.getTagData("Group")
             if not group:
@@ -76,7 +53,6 @@ class GroupDB(lazydb.LazyDB):
 
     def __generate_groups(self, doc):
         return dict([(x.getTagData("Name"), x.toString()) for x in doc.tags("Group")])
->>>>>>> littlebranch
 
     def has_group(self, name, repo = None):
         return self.gdb.has_item(name, repo)
