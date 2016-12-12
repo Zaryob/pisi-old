@@ -19,7 +19,8 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-import piksemel
+#import piksemel sikerim piksemelini haaa :(
+import xml.dom.minidom as minidom
 
 # PiSi
 import pisi
@@ -84,8 +85,8 @@ class InstallDB(lazydb.LazyDB):
     def __add_to_revdeps(self, package, revdeps):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
         try:
-            meta_doc = piksemel.parse(metadata_xml)
-            pkg = meta_doc.getTag("Package")
+            meta_doc = minidom.parse(metadata_xml)
+            pkg = meta_doc.tagName("Package")
         except:
             pkg = None
 
@@ -96,15 +97,15 @@ class InstallDB(lazydb.LazyDB):
             del self.installed_db[package]
             return
 
-        deps = pkg.getTag('RuntimeDependencies')
+        deps = pkg.getElementsByTagName('RuntimeDependencies')
         if deps:
-            for dep in deps.tags("Dependency"):
+            for dep in deps.getElementsByTagName("Dependency"):
                 revdep = revdeps.setdefault(dep.firstChild().data(), {})
-                revdep[package] = dep.toString()
-            for anydep in deps.tags("AnyDependency"):
-                for dep in anydep.tags("Dependency"):
-                    revdep = revdeps.setdefault(dep.firstChild().data(), {})
-                    revdep[package] = anydep.toString()
+                revdep[package] = dep.tostring()
+            for anydep in deps.getElementsByTagName("AnyDependency"):
+                for dep in anydep.getElementByTagName("Dependency"):
+                    revdep = revdeps.setdefault(dep.firstChild().data(), {})##Bu iki satirda
+                    revdep[package] = anydep.tostring()                     ##olasi hatalar bekliyorum
 
     def __generate_revdeps(self):
         revdeps = {}
@@ -135,27 +136,27 @@ class InstallDB(lazydb.LazyDB):
         return found
 
     def __get_version(self, meta_doc):
-        history = meta_doc.getTag("Package").getTag("History")
-        version = history.getTag("Update").getTagData("Version")
-        release = history.getTag("Update").getAttribute("release")
+        history = meta_doc.getElementsByTagName("Package").getElementsByTagName("History")[0].childNodes.data()
+        version = history.getElementsByTagName("Update").getElementsbyTagName("Version")[0].childNodes.data()
+        release = history.getElementsByTagName("Update").hasAttribute("release")
 
         # TODO Remove None
         return version, release, None
 
     def __get_distro_release(self, meta_doc):
-        distro = meta_doc.getTag("Package").getTagData("Distribution")
-        release = meta_doc.getTag("Package").getTagData("DistributionRelease")
+        distro = meta_doc.getElementsByTagName("Package").getElementsByTagName("Distribution")[0].childNodes.data()
+        release = meta_doc.getElementsByTagName("Package").getElementsByTagName("DistributionRelease")[0].childNodes.data()
 
         return distro, release
 
     def get_version_and_distro_release(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        meta_doc = piksemel.parse(metadata_xml)
+        meta_doc = minidom.parse(metadata_xml)
         return self.__get_version(meta_doc) + self.__get_distro_release(meta_doc)
 
     def get_version(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        meta_doc = piksemel.parse(metadata_xml)
+        meta_doc = minidom.parse(metadata_xml)
         return self.__get_version(meta_doc)
 
     def get_files(self, package):
@@ -220,6 +221,7 @@ class InstallDB(lazydb.LazyDB):
                            ctime)
         return info
 
+####        bu modulu         ####
     def __make_dependency(self, depStr):
         node = piksemel.parseString(depStr)
         dependency = pisi.dependency.Dependency()
@@ -228,6 +230,9 @@ class InstallDB(lazydb.LazyDB):
             attr = node.attributes()[0]
             dependency.__dict__[attr] = node.getAttribute(attr)
         return dependency
+####      basten ale al      ####
+
+##   Asagida pisi buglari var orayalara el at
 
     def __create_dependency(self, depStr):
         if "<AnyDependency>" in depStr:
