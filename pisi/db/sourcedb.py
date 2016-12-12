@@ -13,7 +13,8 @@
 import re
 import gzip
 
-import piksemel
+#import piksemel
+import xml.dom.minidom as minidom
 
 import pisi
 import pisi.specfile
