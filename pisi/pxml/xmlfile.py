@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 #
 # Copyright (C) 2005 - 2007, TUBITAK/UEKAE
 #
@@ -21,9 +21,10 @@
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
-import piksemel as iks
+#import piksemel as iks
+import xml.dom.minidom as minidom
 
 import pisi
 import pisi.file
@@ -39,7 +40,7 @@ class XmlFile(object):
 
     def newDocument(self):
         """clear DOM"""
-        self.doc = iks.newDocument(self.rootTag)
+        self.doc = minidom.createDocument(self.rootTag)
 
     def unlink(self):
         """deallocate DOM structure"""
@@ -52,9 +53,9 @@ class XmlFile(object):
     def parsexml(self, xml):
         """parses xml string and returns DOM"""
         try:
-            self.doc = iks.parseString(xml)
+            self.doc = minidom.parseString(xml)
             return self.doc
-        except Exception, e:
+        except Exception as e:
             raise Error(_("String '%s' has invalid XML") % (xml))
 
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
@@ -75,17 +76,17 @@ class XmlFile(object):
                                                 compress=compress,sign=sign, copylocal=copylocal)
 
         try:
-            self.doc = iks.parse(localpath)
+            self.doc = minidom.parse(localpath)
             return self.doc
-        except OSError, e:
+        except OSError as e:
             raise Error(_("Unable to read file (%s): %s") %(localpath,e))
-        except Exception, e:
+        except Exception as e:
             raise Error(_("File '%s' has invalid XML") % (localpath) )
 
     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
         f = pisi.file.File(uri, pisi.file.File.write, sha1sum=sha1sum, compress=compress, sign=sign)
-        f.write(self.doc.toPrettyString())
+        f.write(self.doc.tostring())
         f.close()
 
     def writexmlfile(self, f):
-        f.write(self.doc.toPrettyString())
+        f.write(self.doc.tostring())

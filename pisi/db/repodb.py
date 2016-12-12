@@ -17,8 +17,7 @@ _ = __trans.gettext
 import os
 
 #import piksemel #we should use lxml
-
-from lxml import etree
+import xml.dom.minidom
 
 import pisi
 import pisi.uri
@@ -250,8 +249,8 @@ class RepoDB(lazydb.LazyDB):
 
     def get_distribution_release(self, name):
         doc = self.get_repo_doc(name)
-        distro = doc.getTag("Distribution")
-        return distro and distro.getTagData("Version")
+        distro = doc.getElementsByTagName("Distribution")[0].childNodes.data
+        return distro and distro.get("Version")
 
     def check_distribution(self, name):
         if ctx.get_option('ignore_check'):
