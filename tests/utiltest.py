@@ -27,9 +27,15 @@ class UtilTestCase(unittest.TestCase):
         assert ['usr', 'lib', 'pardus'] == splitpath('usr/lib/pardus')
 
     def testSubPath(self):
+<<<<<<< HEAD
         self.assertTrue(subpath('usr','usr'))
         self.assertTrue(subpath('usr','usr/local/src'))
         self.assertTrue(not subpath('usr/local','usr'))
+=======
+        self.assert_(subpath('usr','usr'))
+        self.assert_(subpath('usr','usr/local/src'))
+        self.assert_(not subpath('usr/local','usr'))
+>>>>>>> littlebranch
 
     def testRemovePathPrefix(self):
         pathname = removepathprefix('usr/local', 'usr/local/src')

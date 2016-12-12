@@ -23,7 +23,7 @@ _ = __trans.gettext
 # standard python modules
 import os.path
 #import piksemel
-from lxml import etree
+import xml.dom.minidom
 # pisi modules
 import pisi.pxml.xmlfile as xmlfile
 import pisi.pxml.autoxml as autoxml

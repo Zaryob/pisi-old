@@ -8,7 +8,11 @@ class ConstantTestCase(unittest.TestCase):
         constants = ctx.const
         constDict = {"actions": "actions.py", "setup":"setup","metadata":"metadata.xml"}
 
+<<<<<<< HEAD
         for i in list(constDict.keys()):
+=======
+        for i in constDict.keys():
+>>>>>>> littlebranch
             if hasattr(constants,i):
                 value = getattr(constants,i)
                 self.assertEqual(value, constDict[i])

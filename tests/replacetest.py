@@ -13,7 +13,11 @@ class ReplaceTestCase(unittest.TestCase):
         replace = pisi.replace.Replace(relation)
         replace.package = "zlib"
         # Check if the replaced package is installed
+<<<<<<< HEAD
         self.assertTrue(pisi.replace.installed_package_replaced(replace))
+=======
+        self.assert_(pisi.replace.installed_package_replaced(replace))
+>>>>>>> littlebranch
         repinfo = pisi.replace.Replace(relation)
         repinfo.package = "ctorrent"
         assert not pisi.replace.installed_package_replaced(repinfo)
