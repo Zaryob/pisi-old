@@ -14,20 +14,18 @@
  XmlFile class further abstracts a dom object using the
  high-level dom functions provided in xmlext module (and sorely lacking
  in xml.dom :( )
-
  function names are mixedCase for compatibility with minidom,
  an 'old library'
-
  this implementation uses piksemel
 """
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
-#import piksemel as iks
-from lxml import etree
+import piksemel as iks
 
+import pisi
 import pisi.file
 
 class Error(pisi.Error):
@@ -41,8 +39,7 @@ class XmlFile(object):
 
     def newDocument(self):
         """clear DOM"""
-#	rootag = etree.Element(root.Tag)
-#        self.doc = etree.ElementTree(rootag)
+        self.doc = iks.newDocument(self.rootTag)
 
     def unlink(self):
         """deallocate DOM structure"""
@@ -55,9 +52,9 @@ class XmlFile(object):
     def parsexml(self, xml):
         """parses xml string and returns DOM"""
         try:
-            self.doc = etree.parse(xml)
+            self.doc = iks.parseString(xml)
             return self.doc
-        except Exception as e:
+        except Exception, e:
             raise Error(_("String '%s' has invalid XML") % (xml))
 
     def readxml(self, uri, tmpDir='/tmp', sha1sum=False,
@@ -78,17 +75,17 @@ class XmlFile(object):
                                                 compress=compress,sign=sign, copylocal=copylocal)
 
         try:
-            self.doc = etree.parse(localpath)
+            self.doc = iks.parse(localpath)
             return self.doc
-        except OSError as e:
+        except OSError, e:
             raise Error(_("Unable to read file (%s): %s") %(localpath,e))
-        except Exception as e:
+        except Exception, e:
             raise Error(_("File '%s' has invalid XML") % (localpath) )
 
     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
         f = pisi.file.File(uri, pisi.file.File.write, sha1sum=sha1sum, compress=compress, sign=sign)
-        f.write(self.doc.tostring())
+        f.write(self.doc.toPrettyString())
         f.close()
 
     def writexmlfile(self, f):
-        f.write(self.doc.tostring())
+        f.write(self.doc.toPrettyString())
