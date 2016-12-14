@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-#
-# Copyright (C) 2016-2017, Aquila Nipalensis
+
+# Copyright (C) 2005 - 2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -23,7 +23,7 @@ import shutil
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 # pisi modules
 import pisi

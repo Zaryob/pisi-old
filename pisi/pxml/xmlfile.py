@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2005 - 2007, TUBITAK/UEKAE
 #
@@ -14,17 +14,18 @@
  XmlFile class further abstracts a dom object using the
  high-level dom functions provided in xmlext module (and sorely lacking
  in xml.dom :( )
+
  function names are mixedCase for compatibility with minidom,
  an 'old library'
+
  this implementation uses piksemel
 """
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
-#import piksemel as iks
-import xml.dom.minidom as minidom
+import piksemel as iks
 
 import pisi
 import pisi.file
@@ -40,7 +41,7 @@ class XmlFile(object):
 
     def newDocument(self):
         """clear DOM"""
-        self.doc = minidom.createDocument(self.rootTag)
+        self.doc = iks.newDocument(self.rootTag)
 
     def unlink(self):
         """deallocate DOM structure"""
@@ -53,7 +54,7 @@ class XmlFile(object):
     def parsexml(self, xml):
         """parses xml string and returns DOM"""
         try:
-            self.doc = minidom.parseString(xml)
+            self.doc = iks.parseString(xml)
             return self.doc
         except Exception as e:
             raise Error(_("String '%s' has invalid XML") % (xml))
@@ -70,13 +71,17 @@ class XmlFile(object):
         if uri.is_local_file() and not compressed:
             # this is a local file
             localpath = uri.path()
+            if not tmpDir == '/tmp':
+                # copy file for autocompletion
+                import shutil
+                shutil.copy(localpath, tmpDir)
         else:
             # this is a remote file, first download it into tmpDir
             localpath = pisi.file.File.download(uri, tmpDir, sha1sum=sha1sum, 
                                                 compress=compress,sign=sign, copylocal=copylocal)
 
         try:
-            self.doc = minidom.parse(localpath)
+            self.doc = iks.parse(localpath)
             return self.doc
         except OSError as e:
             raise Error(_("Unable to read file (%s): %s") %(localpath,e))
@@ -85,8 +90,8 @@ class XmlFile(object):
 
     def writexml(self, uri, tmpDir = '/tmp', sha1sum=False, compress=None, sign=None):
         f = pisi.file.File(uri, pisi.file.File.write, sha1sum=sha1sum, compress=compress, sign=sign)
-        f.write(self.doc.tostring())
+        f.write(self.doc.toPrettyString())
         f.close()
 
     def writexmlfile(self, f):
-        f.write(self.doc.tostring())
+        f.write(self.doc.toPrettyString())

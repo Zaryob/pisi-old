@@ -16,7 +16,7 @@ defined."""
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 from pisi.util import Singleton
 
@@ -94,7 +94,15 @@ class Constants(metaclass=Singleton):
         self.__c.needs_restart = "needsrestart"
         self.__c.needs_reboot = "needsreboot"
         self.__c.files_db = "files.db"
+        self.__c.files_ldb = "files.ldb"
         self.__c.repos = "repos"
+        self.__c.devel_package_end = "-devel"
+        self.__c.doc_package_end = "-docs?$"
+        self.__c.assign_to_system_devel = ["system.base", "system.devel"]
+        self.__c.system_devel_component = "system.devel"
+        self.__c.devels_component = "programming.devel"
+        self.__c.docs_component = "programming.docs"
+        self.__c.installed_extra = "installedextra"
 
         #file/directory permissions
         self.__c.umask = 0o022

@@ -13,7 +13,7 @@
 import gzip
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 import pisi.db
 

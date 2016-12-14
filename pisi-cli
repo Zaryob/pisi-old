@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/python
 #
-# Copyright (C) Aquila Nipalensis
+# Copyright (C) 2005 - 2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -13,7 +13,7 @@
 import sys
 import errno
 import traceback
-#import exceptions this library there arent on python3
+import exceptions
 import signal
 
 import pisi
@@ -24,7 +24,7 @@ import gettext
 gettext.bindtextdomain('pisi', "/usr/share/locale")
 gettext.textdomain('pisi')
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 def sig_handler(sig, frame):
     if sig == signal.SIGTERM:
@@ -79,4 +79,6 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM, sig_handler)
 
     cli = pisicli.PisiCLI()
+    if cli.command.name[1] in "rdb sf".split():
+        ctx.filesdb = pisi.db.filesldb.FilesLDB()
     cli.run_command()

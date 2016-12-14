@@ -19,8 +19,7 @@ import gettext
 __trans = gettext.translation('pisi', fallback=True)
 _ = __trans.ugettext
 
-#import piksemel sikerim piksemelini haaa :(
-import xml.dom.minidom as minidom
+import piksemel
 
 # PiSi
 import pisi
@@ -68,6 +67,15 @@ class InstallDB(lazydb.LazyDB):
     def init(self):
         self.installed_db = self.__generate_installed_pkgs()
         self.rev_deps_db = self.__generate_revdeps()
+        self.installed_extra = self.__generate_installed_extra() 
+
+    def __generate_installed_extra(self):
+        ie = []
+        ie_path = os.path.join(ctx.config.info_dir(), ctx.const.installed_extra)
+        if os.path.isfile(ie_path):
+             with open(ie_path) as ie_file:
+                 ie.extend(ie_file.read().strip().split("\n"))
+        return ie
 
     def __generate_installed_pkgs(self):
         def split_name(dirname):
@@ -85,8 +93,8 @@ class InstallDB(lazydb.LazyDB):
     def __add_to_revdeps(self, package, revdeps):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
         try:
-            meta_doc = minidom.parse(metadata_xml)
-            pkg = meta_doc.tagName("Package")
+            meta_doc = piksemel.parse(metadata_xml)
+            pkg = meta_doc.getTag("Package")
         except:
             pkg = None
 
@@ -97,15 +105,15 @@ class InstallDB(lazydb.LazyDB):
             del self.installed_db[package]
             return
 
-        deps = pkg.getElementsByTagName('RuntimeDependencies')
+        deps = pkg.getTag('RuntimeDependencies')
         if deps:
-            for dep in deps.getElementsByTagName("Dependency"):
+            for dep in deps.tags("Dependency"):
                 revdep = revdeps.setdefault(dep.firstChild().data(), {})
-                revdep[package] = dep.tostring()
-            for anydep in deps.getElementsByTagName("AnyDependency"):
-                for dep in anydep.getElementByTagName("Dependency"):
-                    revdep = revdeps.setdefault(dep.firstChild().data(), {})##Bu iki satirda
-                    revdep[package] = anydep.tostring()                     ##olasi hatalar bekliyorum
+                revdep[package] = dep.toString()
+            for anydep in deps.tags("AnyDependency"):
+                for dep in anydep.tags("Dependency"):
+                    revdep = revdeps.setdefault(dep.firstChild().data(), {})
+                    revdep[package] = anydep.toString()
 
     def __generate_revdeps(self):
         revdeps = {}
@@ -136,27 +144,37 @@ class InstallDB(lazydb.LazyDB):
         return found
 
     def __get_version(self, meta_doc):
-        history = meta_doc.getElementsByTagName("Package").getElementsByTagName("History")[0].childNodes.data()
-        version = history.getElementsByTagName("Update").getElementsbyTagName("Version")[0].childNodes.data()
-        release = history.getElementsByTagName("Update").hasAttribute("release")
+        history = meta_doc.getTag("Package").getTag("History")
+        version = history.getTag("Update").getTagData("Version")
+        release = history.getTag("Update").getAttribute("release")
 
         # TODO Remove None
         return version, release, None
 
     def __get_distro_release(self, meta_doc):
-        distro = meta_doc.getElementsByTagName("Package").getElementsByTagName("Distribution")[0].childNodes.data()
-        release = meta_doc.getElementsByTagName("Package").getElementsByTagName("DistributionRelease")[0].childNodes.data()
+        distro = meta_doc.getTag("Package").getTagData("Distribution")
+        release = meta_doc.getTag("Package").getTagData("DistributionRelease")
 
         return distro, release
 
+    def __get_install_tar_hash(self, meta_doc):
+        hash = meta_doc.getTag("Package").getTagData("InstallTarHash")
+
+        return hash
+
+    def get_install_tar_hash(self, package):
+        metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
+        meta_doc = piksemel.parse(metadata_xml)
+        return self.__get_install_tar_hash(meta_doc)
+
     def get_version_and_distro_release(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        meta_doc = minidom.parse(metadata_xml)
+        meta_doc = piksemel.parse(metadata_xml)
         return self.__get_version(meta_doc) + self.__get_distro_release(meta_doc)
 
     def get_version(self, package):
         metadata_xml = os.path.join(self.package_path(package), ctx.const.metadata_xml)
-        meta_doc = minidom.parse(metadata_xml)
+        meta_doc = piksemel.parse(metadata_xml)
         return self.__get_version(meta_doc)
 
     def get_files(self, package):
@@ -169,7 +187,7 @@ class InstallDB(lazydb.LazyDB):
         files = self.get_files(package)
         return [x for x in files.list if x.type == 'config']
 
-    def search_package(self, terms, lang=None, fields=None):
+    def search_package(self, terms, lang=None, fields=None, cs=False):
         """
         fields (dict) : looks for terms in the fields which are marked as True
         If the fields is equal to None this method will search in all fields
@@ -191,9 +209,9 @@ class InstallDB(lazydb.LazyDB):
             if terms == [term for term in terms if (fields['name'] and \
                     re.compile(term, re.I).search(name)) or \
                     (fields['summary'] and \
-                    re.compile(resum % (lang, term), re.I).search(xml)) or \
+                    re.compile(resum % (lang, term), 0 if cs else re.I).search(xml)) or \
                     (fields['desc'] and \
-                    re.compile(redesc % (lang, term), re.I).search(xml))]:
+                    re.compile(redesc % (lang, term), 0 if cs else re.I).search(xml))]:
                 found.append(name)
         return found
 
@@ -221,7 +239,6 @@ class InstallDB(lazydb.LazyDB):
                            ctime)
         return info
 
-####        bu modulu         ####
     def __make_dependency(self, depStr):
         node = piksemel.parseString(depStr)
         dependency = pisi.dependency.Dependency()
@@ -230,9 +247,6 @@ class InstallDB(lazydb.LazyDB):
             attr = node.attributes()[0]
             dependency.__dict__[attr] = node.getAttribute(attr)
         return dependency
-####      basten ale al      ####
-
-##   Asagida pisi buglari var orayalara el at
 
     def __create_dependency(self, depStr):
         if "<AnyDependency>" in depStr:
@@ -253,6 +267,19 @@ class InstallDB(lazydb.LazyDB):
                 rev_deps.append((pkg, dependency))
 
         return rev_deps
+
+    def get_orphaned(self):
+        """
+        get list of packages installed as extra dependency,
+        but without reverse dependencies now.
+        """
+        return [x for x in self.installed_extra if not self.get_rev_deps(x)]
+
+    def get_no_rev_deps(self):
+        """
+        get installed packages list which haven't reverse dependencies.
+        """
+        return [x for x in self.installed_db if not self.get_rev_deps(x)]
 
     def pkg_dir(self, pkg, version, release):
         return pisi.util.join_path(ctx.config.packages_dir(), pkg + '-' + version + '-' + release)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2016-2017, Aquila Nipalensis
+# Copyright (C) 2005 - 2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -12,12 +12,11 @@
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 import os
 
-#import piksemel #we should use lxml
-import xml.dom.minidom
+import piksemel
 
 import pisi
 import pisi.uri
@@ -70,8 +69,8 @@ class RepoOrder:
     def set_status(self, repo_name, status):
         repo_doc = self._get_doc()
 
-        for r in repo_doc.getroot():
-            if r.("Name") == repo_name:
+        for r in repo_doc.tags("Repo"):
+            if r.getTagData("Name") == repo_name:
                 status_node = r.getTag("Status")
                 if status_node:
                     status_node.firstChild().hide()
@@ -122,11 +121,9 @@ class RepoOrder:
         if self._doc is None:
             repos_file = os.path.join(ctx.config.info_dir(), ctx.const.repos)
             if os.path.exists(repos_file):
-		
-                self._doc = etree.parse(repos_file)
+                self._doc = piksemel.parse(repos_file)
             else:
-		rootag = etree.Element("REPOS")
-                self._doc = etree.ElementTree(rootag)
+                self._doc = piksemel.newDocument("REPOS")
 
         return self._doc
 
@@ -134,7 +131,7 @@ class RepoOrder:
         repo_doc = self._get_doc()
         order = {}
 
-        for r in repo_doc.("Repo"):
+        for r in repo_doc.tags("Repo"):
             media = r.getTagData("Media")
             name = r.getTagData("Name")
             status = r.getTagData("Status")
@@ -154,9 +151,6 @@ class RepoDB(lazydb.LazyDB):
         return url in self.list_repo_urls(only_active)
 
     def get_repo_doc(self, repo_name):
-        if not self.has_repo(repo_name):
-            raise RepoError(_("Repository %s does not exist.") % repo)
-
         repo = self.get_repo(repo_name)
 
         index_path = repo.indexuri.get_uri()
@@ -184,9 +178,6 @@ class RepoDB(lazydb.LazyDB):
 
     #FIXME: this method is a quick hack around repo_info.indexuri.get_uri()
     def get_repo_url(self, repo):
-        if not self.has_repo(repo):
-            raise RepoError(_("Repository %s does not exist.") % repo)
-
         urifile_path = pisi.util.join_path(ctx.config.index_dir(), repo, "uri")
         uri = open(urifile_path, "r").read()
         return uri.rstrip()
@@ -249,8 +240,8 @@ class RepoDB(lazydb.LazyDB):
 
     def get_distribution_release(self, name):
         doc = self.get_repo_doc(name)
-        distro = doc.getElementsByTagName("Distribution")[0].childNodes.data
-        return distro and distro.get("Version")
+        distro = doc.getTag("Distribution")
+        return distro and distro.getTagData("Version")
 
     def check_distribution(self, name):
         if ctx.get_option('ignore_check'):

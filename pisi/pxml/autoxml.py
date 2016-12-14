@@ -30,7 +30,7 @@ import re
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 # PiSi
 import pisi
@@ -91,7 +91,7 @@ class LocalText(dict):
 
     def encode(self, node, errs):
         assert self.tag != ''
-        for key in list(self.keys()):
+        for key in self.keys():
             newnode = xmlext.addNode(node, self.tag)
             xmlext.setNodeAttribute(newnode, 'xml:lang', key)
             xmlext.addText(newnode, '',  self[key])
@@ -325,7 +325,7 @@ class autoxml(oo.autosuper, oo.autoprop):
                 base.__init__(self)
             for init in inits:
                 init(self)
-            for x in list(args.keys()):
+            for x in args.keys():
                 setattr(self, x, args[x])
             # init hook
             if hasattr(self, 'init'):
@@ -336,7 +336,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.__init__ = initialize
 
         cls.decoders = decoders
-        def decode(self, node, errs, where = cls.tag):
+        def decode(self, node, errs, where = str(cls.tag)):
             for base in cls.autoxml_bases:
                 base.decode(self, node, errs, where)
             for decode_member in decoders:#self.__class__.decoders:
@@ -356,7 +356,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.encode = encode
 
         cls.errorss = errorss
-        def errors(self, where = name):
+        def errors(self, where = str(name)):
             errs = []
             for base in cls.autoxml_bases:
                 errs.extend(base.errors(self, where))

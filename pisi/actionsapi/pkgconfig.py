@@ -136,3 +136,4 @@ def libraryExists(library):
             raise PkgconfigError(_("pkg-config is not installed on your system."))
     else:
         return result == 0
+

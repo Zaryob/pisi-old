@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2016-2017, Aquila Nipalensis
+# Copyright (C) 2005 - 2007, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -17,7 +17,7 @@ import glob
 import sys
 import inspect
 import tempfile
-from distutils.core import setup
+from setuptools import setup
 from distutils.command.build import build
 from distutils.command.install import install
 
@@ -152,22 +152,27 @@ class Install(install):
                     pisiconf.write("%s = %s\n" % (member[0], member[1]))
             pisiconf.write('\n')
 
-
+datas = [
+    ("/etc/pisi/" ,["applied-patches/mirrors.conf", "applied-patches/sandbox.conf"]),
+    ("/usr/share/mime/packages/", ["pisi.xml"]),
+    ("/usr/lib/tmpfiles.d/", ["applied-patches/pisi.conf"])
+]
 
 setup(name="pisi",
     version= pisi.__version__,
     description="PiSi (Packages Installed Successfully as Intended)",
-    long_description="PiSi is the package management system of Pardus Linux.",
+    long_description="PiSi is the package management system of Pisi Linux.",
     license="GNU GPL2",
-    author="Pardus Developers",
-    author_email="pisi@pardus.org.tr",
-    url="http://www.pardus.org.tr/eng/pisi/",
+    author="Pisi Linux Developers",
+    author_email="admins@pisilinux.org",
+    url="https://github.com/pisilinux/project/tree/master/pisi",
     package_dir = {'': ''},
     packages = ['pisi', 'pisi.cli', 'pisi.operations', 'pisi.actionsapi', 'pisi.pxml', 'pisi.scenarioapi', 'pisi.db'],
     scripts = ['pisi-cli', 'scripts/lspisi', 'scripts/unpisi', 'scripts/check-newconfigs.py', 'scripts/revdep-rebuild'],
     cmdclass = {'build' : Build,
                 'build_po' : BuildPo,
-                'install' : Install}
+                'install' : Install},
+    data_files =datas
     )
 
 # the below stuff is really nice but we already have a version

@@ -61,7 +61,7 @@ def get_file_type(path, pinfo_list):
     """Return the file type of a path according to the given PathInfo
     list"""
 
-    path = "/%s" % path
+    path = "/%s" % re.sub("/+", "/", path)
     info = None
     glob_match = parent_match = None
 
@@ -119,7 +119,7 @@ def exclude_special_files(filepath, fileinfo, ag):
     keeplist = ag.get("KeepSpecial", [])
     patterns = {"libtool": "libtool library file",
                 "python":  "python.*byte-compiled",
-                "perl":    "Perl POD document.* text"}
+                "perl":    "Perl POD document text"}
 
     if "libtool" in keeplist:
         # Some upstream sources have buggy libtool and ltmain.sh with them,
@@ -140,7 +140,10 @@ def exclude_special_files(filepath, fileinfo, ag):
         if name in keeplist:
             continue
 
-        if re.match(pattern, fileinfo):
+        if fileinfo == None:
+            ctx.ui.warning(_("Removing special file skipped for: %s") % filepath)
+            return
+        elif re.match(pattern, fileinfo):
             ctx.ui.debug("Removing special %s file: %s" % (name, filepath))
             os.unlink(filepath)
             # Remove dir if it becomes empty (Bug #11588)
@@ -207,12 +210,7 @@ class Builder:
         self.set_spec_file(specuri)
 
         if specuri.is_remote_file():
-            self.specdiruri = os.path.dirname(self.specuri.get_uri())
-            pkgname = os.path.basename(self.specdiruri)
-            self.specdir = util.join_path(ctx.config.tmp_dir(), pkgname)
-
-            self.fetch_actionsfile()
-            self.fetch_translationsfile()
+            self.specdir = self.fetch_files()
         else:
             self.specdir = os.path.dirname(self.specuri.get_uri())
 
@@ -328,17 +326,13 @@ class Builder:
         ctx.ui.status(_("Building source package: %s")
                       % self.spec.source.name)
 
-        self.check_build_dependencies()
-
-        if self.specuri.is_remote_file():
-            self.fetch_files()
-
         self.compile_comar_script()
 
         # check if all patch files exists, if there are missing no need
         # to unpack!
         self.check_patches()
 
+        self.check_build_dependencies()
         self.fetch_component()
         self.fetch_source_archives()
 
@@ -398,24 +392,30 @@ class Builder:
 
         env = {"PKG_DIR": self.pkg_dir(),
                "WORK_DIR": self.pkg_work_dir(),
+               "HOME": self.pkg_work_dir(),
                "INSTALL_DIR": self.pkg_install_dir(),
                "PISI_BUILD_TYPE": self.build_type,
                "SRC_NAME": self.spec.source.name,
                "SRC_VERSION": self.spec.getSourceVersion(),
-               "SRC_RELEASE": self.spec.getSourceRelease()}
+               "SRC_RELEASE": self.spec.getSourceRelease(),
+               "PYTHONDONTWRITEBYTECODE": '1'}
+        if self.build_type == "emul32":
+            env["CC"] = "%s -m32" % os.getenv("CC")
+            env["CXX"] = "%s -m32" % os.getenv("CXX")
+            env["CFLAGS"] = os.getenv("CFLAGS").replace("-fPIC", "")
+            env["CXXFLAGS"] = os.getenv("CXXFLAGS").replace("-fPIC", "")
+            env["PKG_CONFIG_PATH"] = "/usr/lib32/pkgconfig"
         os.environ.update(env)
 
         # First check icecream, if not found use ccache
         # TODO: Add support for using both of them
         if ctx.config.values.build.buildhelper == "icecream":
-            if os.path.exists("/opt/icecream/bin/%s" % ctx.config.values.build.cc):
+            if os.path.exists("/opt/icecream/bin/gcc"):
                 self.has_icecream = True
                 os.environ["PATH"] = "/opt/icecream/bin:%(PATH)s" % os.environ
-            else:
-                ctx.ui.warning(_("Specified compiler is not supported by icecream, it will be disabled."))
 
         elif ctx.config.values.build.buildhelper == "ccache":
-            if os.path.exists("/usr/lib/ccache/bin/%s" % ctx.config.values.build.cc):
+            if os.path.exists("/usr/lib/ccache/bin/gcc"):
                 self.has_ccache = True
 
                 os.environ["PATH"] = "/usr/lib/ccache/bin:%(PATH)s" \
@@ -423,27 +423,35 @@ class Builder:
                 # Force ccache to use /root/.ccache instead of $HOME/.ccache
                 # as $HOME can be modified through actions.py
                 os.environ["CCACHE_DIR"] = "/root/.ccache"
-            else:
-                ctx.ui.warning(_("Specified compiler is not supported by ccache, it will be disabled."))
 
     def fetch_files(self):
+        self.specdiruri = os.path.dirname(self.specuri.get_uri())
+        pkgname = os.path.basename(self.specdiruri)
+        self.destdir = util.join_path(ctx.config.tmp_dir(), pkgname)
+        #self.location = os.path.dirname(self.url.uri)
+
+        self.fetch_actionsfile()
+        self.check_build_dependencies()
+        self.fetch_translationsfile()
         self.fetch_patches()
         self.fetch_comarfiles()
         self.fetch_additionalFiles()
 
+        return self.destdir
+
     def fetch_pspecfile(self):
         pspecuri = util.join_path(self.specdiruri, ctx.const.pspec_file)
-        self.download(pspecuri, self.specdir)
+        self.download(pspecuri, self.destdir)
 
     def fetch_actionsfile(self):
         actionsuri = util.join_path(self.specdiruri, ctx.const.actions_file)
-        self.download(actionsuri, self.specdir)
+        self.download(actionsuri, self.destdir)
 
     def fetch_translationsfile(self):
         translationsuri = util.join_path(self.specdiruri,
                                          ctx.const.translations_file)
         try:
-            self.download(translationsuri, self.specdir)
+            self.download(translationsuri, self.destdir)
         except pisi.fetcher.FetchError:
             # translations.xml is not mandatory for PiSi
             pass
@@ -454,7 +462,7 @@ class Builder:
             patchuri = util.join_path(self.specdiruri,
                                       ctx.const.files_dir,
                                       patch.filename)
-            self.download(patchuri, util.join_path(self.specdir,
+            self.download(patchuri, util.join_path(self.destdir,
                                                    ctx.const.files_dir,
                                                    dir_name))
 
@@ -463,7 +471,7 @@ class Builder:
             for pcomar in package.providesComar:
                 comaruri = util.join_path(self.specdiruri,
                                 ctx.const.comar_dir, pcomar.script)
-                self.download(comaruri, util.join_path(self.specdir,
+                self.download(comaruri, util.join_path(self.destdir,
                                                        ctx.const.comar_dir))
 
     def fetch_additionalFiles(self):
@@ -473,7 +481,7 @@ class Builder:
                 dir_name = os.path.dirname(afile.filename)
                 afileuri = util.join_path(self.specdiruri,
                                 ctx.const.files_dir, dir_name, file_name)
-                self.download(afileuri, util.join_path(self.specdir,
+                self.download(afileuri, util.join_path(self.destdir,
                                                        ctx.const.files_dir,
                                                        dir_name))
 
@@ -516,9 +524,6 @@ class Builder:
         self.sourceArchives.fetch()
 
     def unpack_source_archives(self):
-        # Remove the old work directory if exists
-        util.clean_dir(self.pkg_work_dir())
-
         ctx.ui.action(_("Unpacking archive(s)..."))
         self.sourceArchives.unpack(self.pkg_work_dir())
 
@@ -562,6 +567,7 @@ class Builder:
         install_dir = self.pkg_install_dir()
         abandoned_files = []
         all_paths_in_packages = []
+        skip_paths = []
 
         for package in self.spec.packages:
             for path in package.files:
@@ -572,7 +578,7 @@ class Builder:
             "Return True if path2 includes path1"
             return path1 == path2 \
                     or fnmatch.fnmatch(path1, path2) \
-                    or fnmatch.fnmatch(path1, util.join_path(path2, "*"))
+                    or (not os.path.isfile(path2) and fnmatch.fnmatch(path1, util.join_path(path2, "*")))
 
         for root, dirs, files in os.walk(install_dir):
             if not dirs and not files:
@@ -582,12 +588,24 @@ class Builder:
                 else:
                     abandoned_files.append(root)
 
+            if root in all_paths_in_packages: 
+                skip_paths.append(root)
+                continue
+
+            skip = False 
+            for skip_path in skip_paths:
+                if root.startswith(skip_path):
+                    skip = True
+                    break
+            if skip: continue
+
             for file_ in files:
                 fpath = util.join_path(root, file_)
                 for _path in all_paths_in_packages:
                     if is_included(fpath, _path):
+                        if os.path.isfile(_path):
+                            all_paths_in_packages.pop(all_paths_in_packages.index(_path))
                         break
-
                 else:
                     abandoned_files.append(fpath)
 
@@ -676,6 +694,9 @@ class Builder:
                 src_dir, ext = os.path.splitext(src_dir)
                 if not ext:
                     break
+            if not os.path.exists(src_dir):
+                src_dir = util.join_path(self.pkg_work_dir(), [d for d in os.walk(self.pkg_work_dir()).next()[1] if not d.startswith(".")][0])
+                if self.get_state() == "unpack": ctx.ui.debug("Using %s as  WorkDir" % src_dir)
 
         return src_dir
 
@@ -700,7 +721,8 @@ class Builder:
 
         if func in self.actionLocals:
             if ctx.get_option('ignore_sandbox') or \
-                    not ctx.config.values.build.enablesandbox:
+                    not ctx.config.values.build.enablesandbox or \
+                    "emul32" in self.build_type:
                 self.actionLocals[func]()
             else:
                 import catbox
@@ -1003,6 +1025,8 @@ class Builder:
         """Build each package defined in PSPEC file. After this process there
         will be .pisi files hanging around, AS INTENDED ;)"""
 
+        doc_ptrn = re.compile(ctx.const.doc_package_end)
+
         self.fetch_component()  # bug 856
 
         # Operations and filters for package files
@@ -1076,7 +1100,15 @@ class Builder:
             if not package.description:
                 package.description = self.spec.source.description
             if not package.partOf:
-                package.partOf = self.spec.source.partOf
+                if package.name.endswith(ctx.const.devel_package_end):
+                    if self.spec.source.partOf in ctx.const.assign_to_system_devel:
+                        package.partOf = ctx.const.system_devel_component
+                    else:
+                        package.partOf = ctx.const.devels_component
+                elif re.search(doc_ptrn, package.name):
+                    package.partOf = ctx.const.docs_component
+                else:
+                    package.partOf = self.spec.source.partOf
             if not package.license:
                 package.license = self.spec.source.license
             if not package.icon:
@@ -1093,8 +1125,6 @@ class Builder:
             ctx.ui.action(_("Building package: %s") % package.name)
 
             self.gen_metadata_xml(package)
-
-            self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
 
             name = self.package_filename(self.metadata.package)
 
@@ -1124,8 +1154,6 @@ class Builder:
 
             # add xmls and files
             os.chdir(self.pkg_dir())
-
-            pkg.add_metadata_xml(ctx.const.metadata_xml)
             pkg.add_files_xml(ctx.const.files_xml)
 
             # Sort the files in-place according to their path for an ordered
@@ -1138,6 +1166,10 @@ class Builder:
                 if package.debug_package:
                     orgname = util.join_path("debug", finfo.path)
                 pkg.add_to_install(orgname, finfo.path)
+
+            self.metadata.package.installTarHash = util.sha1_file("%s/install.tar.xz" % self.pkg_dir())
+            self.metadata.write(util.join_path(self.pkg_dir(), ctx.const.metadata_xml))
+            pkg.add_metadata_xml(ctx.const.metadata_xml)
 
             os.chdir(c)
 
@@ -1187,6 +1219,12 @@ class Builder:
                 path = util.join_path(package_dir, filename)
                 if os.path.exists(path):
                     return path
+                else:
+                    path = os.path.join(package_dir,
+                                        util.parse_package_dir_path(filename),
+                                        filename)
+                    if os.path.exists(path):
+                        return path
 
         old_packages = {}
 
@@ -1261,10 +1299,6 @@ order = {"none": 0,
 
 def __buildState_fetch(pb):
     # fetch is the first state to run.
-
-    if pb.specuri.is_remote_file():
-        pb.fetch_files()
-
     pb.check_patches()
     pb.fetch_source_archives()
 
@@ -1313,14 +1347,14 @@ def build_until(pspec, state):
     else:
         pb = Builder.from_name(pspec)
 
+    pb.compile_comar_script()
+
     if state == "fetch":
         __buildState_fetch(pb)
         return
 
     # from now on build dependencies are needed
     pb.check_build_dependencies()
-
-    pb.compile_comar_script()
 
     if state == "package":
         __buildState_buildpackages(pb)

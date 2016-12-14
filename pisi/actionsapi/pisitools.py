@@ -41,6 +41,11 @@ def dobin(sourceFile, destinationDirectory = '/usr/bin'):
     ''' example call: pisitools.dobin("bin/xloadimage", "/bin", "xload") '''
     executable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
 
+def dopixmaps(sourceFile, destinationDirectory = '/usr/share/pixmaps'):
+    '''insert a data file into /usr/share/pixmaps'''
+    ''' example call: pisitools.dopixmaps("/usr/share/pixmaps/firefox", "firefox") '''
+    readable_insinto(join_path(get.installDIR(), destinationDirectory), sourceFile)
+
 def dodir(destinationDirectory):
     '''creates a directory tree'''
     makedirs(join_path(get.installDIR(), destinationDirectory))
@@ -187,33 +192,57 @@ def rename(sourceFile, destinationFile):
     except OSError as e:
         error(_('ActionsAPI [rename]: %s: %s') % (e, sourceFile))
 
-def dosed(sourceFiles, findPattern, replacePattern = ''):
-    '''replaces patterns in sourceFiles'''
+def dosed(sources, findPattern, replacePattern = '', filePattern = '', deleteLine = False, level = -1):
+    '''replaces patterns in sources'''
 
     ''' example call: pisitools.dosed("/etc/passwd", "caglar", "cem")'''
     ''' example call: pisitools.dosed("/etc/passwd", "caglar")'''
     ''' example call: pisitools.dosed("/etc/pass*", "caglar")'''
     ''' example call: pisitools.dosed("Makefile", "(?m)^(HAVE_PAM=.*)no", r"\1yes")'''
+    ''' example call: pisitools.dosed("./", "^(CFLAGS) =", r"\1 +=", "Makefile", level = 1)
+        will change: ./Makefile and ./*/Makefile'''
+    ''' example call: pisitools.dosed("./", "^\s*g_type_init\(\)", filePattern = ".*.c", deleteLine = True)
+        will change: delete lines which contains "g_type_init()" for all *.c files in ./ directory tree'''
+
+    def get_files(path, pattern, level):
+        res = []
+        if path.endswith("/"): path = path[:-1]
+        for root, dirs, files in os.walk(path):
+            currentLevel = len(root.split("/")) - len(path.split("/"))
+            if not level == -1 and currentLevel > level: continue
+            for f in files:
+                if re.search(pattern, f):
+                    res.append("%s/%s" % (root, f))
+        return res
 
     backupExtension = ".pisi-backup"
-    sourceFilesGlob = glob.glob(sourceFiles)
+    sourceFiles = []
+    sourcesGlob = glob.glob(sources)
+    
+    for source in sourcesGlob:
+        if os.path.isdir(source):
+            sourceFiles.extend(get_files(source, filePattern, level))
+        else:
+            sourceFiles.append(source)
 
     #if there is no match, raise exception
-    if len(sourceFilesGlob) == 0:
-        raise FileError(_('No such file matching pattern: "%s". \'dosed\' operation failed.') % sourceFiles)
+    if len(sourceFiles) == 0:
+        raise FileError(_('No such file matching pattern: "%s". \'dosed\' operation failed.') % filePattern if filePattern else sources)
 
-    for sourceFile in sourceFilesGlob:
+    for sourceFile in sourceFiles:
         if can_access_file(sourceFile):
             backupFile = "%s%s" % (sourceFile, backupExtension)
             for line in fileinput.input(sourceFile, inplace = 1, backup = backupExtension):
                 #FIXME: In-place filtering is disabled when standard input is read
-                line = re.sub(findPattern, replacePattern, line)
+                if re.search(findPattern, line):
+                    line = "" if deleteLine else re.sub(findPattern, replacePattern, line)  
                 sys.stdout.write(line)
             if can_access_file(backupFile):
                 # By default, filecmp.cmp() compares two files by looking file sizes.
                 # shallow=False tells cmp() to look file content.
                 if filecmp.cmp(sourceFile, backupFile, shallow=False):
                     ctx.ui.warning(_('dosed method has not changed file \'%s\'.') % sourceFile)
+                else: ctx.ui.info("%s has been changed by dosed method." % sourceFile, verbose=True)
                 os.unlink(backupFile)
         else:
             raise FileError(_('File does not exist or permission denied: %s') % sourceFile)
@@ -282,3 +311,32 @@ def removeDir(destinationDirectory):
 
     for directory in destdirGlob:
         unlinkDir(directory)
+
+class Flags:
+    def __init__(self, *evars):
+        self.evars = evars
+
+    def add(self, *flags):
+        for evar in self.evars:
+            os.environ[evar] = " ".join(os.environ[evar].split() + [f.strip() for f in flags])            
+
+    def remove(self, *flags):
+        for evar in self.evars:
+            os.environ[evar] = " ".join([v for v in os.environ[evar].split() if v not in [f.strip() for f in flags]])
+
+    def replace(self, old_val, new_val):
+        for evar in self.evars:
+            os.environ[evar] = " ".join([new_val if v == old_val else v for v in os.environ[evar].split()])
+
+    def sub(self, pattern, repl, count=0, flags=0):
+        for evar in self.evars:
+            os.environ[evar] = re.sub(pattern, repl, os.environ[evar], count, flags)
+
+    def reset(self):
+        for evar in self.evars:
+            os.environ[evar] = ""
+
+cflags = Flags("CFLAGS")
+ldflags = Flags("LDFLAGS")
+cxxflags = Flags("CXXFLAGS")
+flags = Flags("CFLAGS", "CXXFLAGS")

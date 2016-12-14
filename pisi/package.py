@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2016-2017, Aquila Nipalensis
+# Copyright (C) 2005-2010, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -239,9 +239,10 @@ class Package:
         this is the function used by the installer"""
         self.impl.unpack_dir_flat(dir, outdir)
 
-    def extract_to(self, outdir):
-        """Extracts contents of the archive to outdir"""
-        self.impl.unpack(outdir)
+    def extract_to(self, outdir, clean_dir = False):
+        """Extracts contents of the archive to outdir. Before extracting if clean_dir 
+        is set, outdir is deleted with its contents"""
+        self.impl.unpack(outdir, clean_dir)
 
     def extract_pisi_files(self, outdir):
         """Extract PiSi control files: metadata.xml, files.xml,

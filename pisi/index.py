@@ -13,12 +13,13 @@
 """PiSi source/package index"""
 
 import os
+import re
 import shutil
 import multiprocessing
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 import pisi
 import pisi.context as ctx
@@ -89,6 +90,20 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
         specs = []
         deltas = {}
 
+        pkgs_sorted = False
+        for fn in os.walk(repo_uri).next()[2]:
+            if fn.endswith(ctx.const.delta_package_suffix) or fn.endswith(ctx.const.package_suffix):
+                pkgpath = os.path.join(repo_uri,
+                                       util.parse_package_dir_path(fn))
+                if not os.path.isdir(pkgpath): os.makedirs(pkgpath)
+                ctx.ui.info("%-80.80s\r" % (_('Sorting: %s ') %
+                    fn), noln = False if ctx.config.get_option("verbose") else True)
+                shutil.copy2(os.path.join(repo_uri, fn), pkgpath)
+                os.remove(os.path.join(repo_uri, fn))
+                pkgs_sorted = True
+        if pkgs_sorted:
+            ctx.ui.info("%-80.80s\r" % '')
+
         for root, dirs, files in os.walk(repo_uri):
             # Filter hidden directories
             # TODO: Add --exclude-dirs parameter to CLI and filter according
@@ -154,14 +169,26 @@ class Index(xmlfile.XmlFile, metaclass=autoxml.autoxml):
 
         # Before calling pool.map check if list is empty or not: python#12157
         if latest_packages:
-            try:
-                # Add binary packages to index using a process pool
-                self.packages = pool.map(add_package, latest_packages)
-            except:
-                pool.terminate()
-                pool.join()
-                ctx.ui.info("")
-                raise
+            sorted_pkgs = {}
+            for pkg in latest_packages:
+                key = re.search("\/((lib)?[\d\w])\/", pkg[0])
+                key = key.group(1) if key else os.path.dirname(pkg[0]) 
+                try:
+                    sorted_pkgs[key].append(pkg)
+                except KeyError:
+                    sorted_pkgs[key] = [pkg]
+            self.packages = []
+            for key, pkgs in sorted(sorted_pkgs.items()):
+                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory %s... " % key)), noln=True)
+                try:
+                    # Add binary packages to index using a process pool
+                    self.packages.extend(pool.map(add_package, pkgs))
+                except:
+                    pool.terminate()
+                    pool.join()
+                    ctx.ui.info("")
+                    raise
+                ctx.ui.info("%-80.80s\r" % (_("Adding packages from directory %s... done." % key)))
 
         ctx.ui.info("")
         pool.close()
@@ -270,7 +297,7 @@ def add_spec(params):
             sf.source.sourceURI = util.removepathprefix(repo_uri, path)
 
         ctx.ui.info("%-80.80s\r" % (_('Adding %s to source index') %
-            path), noln = True)
+            path), noln = False if ctx.config.get_option("verbose") else True)
         return sf
 
     except KeyboardInterrupt:

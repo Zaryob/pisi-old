@@ -16,7 +16,7 @@ import pisi
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 class CycleException(pisi.Exception):
     def __init__(self, cycle):

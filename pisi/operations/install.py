@@ -27,7 +27,7 @@ import pisi.pgraph as pgraph
 import pisi.ui as ui
 import pisi.db
 
-def install_pkg_names(A, reinstall = False):
+def install_pkg_names(A, reinstall = False, extra = False):
     """This is the real thing. It installs packages from
     the repository, trying to perform a minimum number of
     installs"""
@@ -78,7 +78,8 @@ def install_pkg_names(A, reinstall = False):
     if ctx.get_option('dry_run'):
         return True
 
-    if set(order) - A_0:
+    extra_packages = set(order) - A_0
+    if extra_packages:
         if not ctx.ui.confirm(_('There are extra packages due to dependencies. Do you want to continue?')):
             return False
 
@@ -91,10 +92,18 @@ def install_pkg_names(A, reinstall = False):
         conflicts = operations.helper.check_conflicts(order, packagedb)
 
     paths = []
+    extra_paths = {}
     for x in order:
         ctx.ui.info(util.colorize(_("Downloading %d / %d") % (order.index(x)+1, len(order)), "yellow"))
         install_op = atomicoperations.Install.from_name(x)
         paths.append(install_op.package_fname)
+        if x in extra_packages or (extra and x in A):
+            extra_paths[install_op.package_fname] = x
+        elif reinstall and  x in installdb.installed_extra:
+            installdb.installed_extra.remove(x)
+            with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "w") as ie_file:
+                ie_file.write("\n".join(installdb.installed_extra) + ("\n" if installdb.installed_extra else ""))
+
 
     # fetch to be installed packages but do not install them.
     if ctx.get_option('fetch_only'):
@@ -107,6 +116,12 @@ def install_pkg_names(A, reinstall = False):
         ctx.ui.info(util.colorize(_("Installing %d / %d") % (paths.index(path)+1, len(paths)), "yellow"))
         install_op = atomicoperations.Install(path)
         install_op.install(False)
+        try:
+            with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "a") as ie_file:
+                ie_file.write("%s\n" % extra_paths[path])
+            installdb.installed_extra.append(extra_paths[path])
+        except KeyError:
+            pass
 
     return True
 
@@ -118,7 +133,7 @@ def install_pkg_files(package_URIs, reinstall = False):
 
     for x in package_URIs:
         if not x.endswith(ctx.const.package_suffix):
-            raise pisi.Error(_('Mixing file names and package names not supported yet.'))
+            raise Exception(_('Mixing file names and package names not supported yet.'))
 
     # filter packages that are already installed
     tobe_installed, already_installed = [], set()
@@ -162,11 +177,11 @@ def install_pkg_files(package_URIs, reinstall = False):
         for x in list(d_t.keys()):
             pkg = d_t[x]
             if pkg.distributionRelease != ctx.config.values.general.distribution_release:
-                raise pisi.Error(_('Package %s is not compatible with your distribution release %s %s.') \
+                raise Exception(_('Package %s is not compatible with your distribution release %s %s.') \
                         % (x, ctx.config.values.general.distribution, \
                         ctx.config.values.general.distribution_release))
             if pkg.architecture != ctx.config.values.general.architecture:
-                raise pisi.Error(_('Package %s (%s) is not compatible with your %s architecture.') \
+                raise Exception(_('Package %s (%s) is not compatible with your %s architecture.') \
                         % (x, pkg.architecture, ctx.config.values.general.architecture))
 
     def satisfiesDep(dep):
@@ -189,7 +204,7 @@ def install_pkg_files(package_URIs, reinstall = False):
     # be satisfied by installing packages from the repo
     for dep in dep_unsatis:
         if not dep.satisfied_by_repo():
-            raise pisi.Error(_('External dependencies not satisfied: %s') % dep)
+            raise Exception(_('External dependencies not satisfied: %s') % dep)
 
     # if so, then invoke install_pkg_names
     extra_packages = [x.package for x in dep_unsatis]
@@ -198,8 +213,8 @@ def install_pkg_files(package_URIs, reinstall = False):
                          "in order to satisfy dependencies:"))
         ctx.ui.info(util.format_by_columns(sorted(extra_packages)))
         if not ctx.ui.confirm(_('Do you want to continue?')):
-            raise pisi.Error(_('External dependencies not satisfied'))
-        install_pkg_names(extra_packages, reinstall=True)
+            raise Exception(_('External dependencies not satisfied'))
+        install_pkg_names(extra_packages, reinstall=True, extra=True)
 
     class PackageDB:
         def get_package(self, key, repo = None):
@@ -276,7 +291,7 @@ def plan_install_pkg_names(A):
                 # we don't deal with already *satisfied* dependencies
                 if not dep.satisfied_by_installed():
                     if not dep.satisfied_by_repo():
-                        raise pisi.Error(_('%s dependency of package %s is not satisfied') % (dep, pkg.name))
+                        raise Exception(_('%s dependency of package %s is not satisfied') % (dep, pkg.name))
                     if not dep.package in G_f.vertices():
                         Bp.add(str(dep.package))
                     G_f.add_dep(x, dep)

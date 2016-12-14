@@ -10,6 +10,7 @@
 # Please read the COPYING file.
 #
 
+import os
 import sys
 
 import gettext
@@ -81,6 +82,11 @@ in the respective order to satisfy dependencies:
     for x in order:
         if installdb.has_package(x):
             atomicoperations.remove_single(x)
+            if x in installdb.installed_extra:
+                installdb.installed_extra.remove(x)
+                with open(os.path.join(ctx.config.info_dir(), ctx.const.installed_extra), "w") as ie_file:
+                    ie_file.write("\n".join(installdb.installed_extra) + ("\n" if installdb.installed_extra else ""))
+
         else:
             ctx.ui.info(_('Package %s is not installed. Cannot remove.') % x)
 

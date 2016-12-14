@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2016-2017, Aquila Nipalensis
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -22,7 +22,7 @@ import zipfile
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 # PiSi modules
 import pisi
@@ -142,8 +142,12 @@ class ArchiveBase(object):
         self.file_path = file_path
         self.type = atype
 
-    def unpack(self, target_dir):
+    def unpack(self, target_dir, clean_dir=False):
         self.target_dir = target_dir
+        # first we check if we need to clean-up our working env.
+        if os.path.exists(self.target_dir):
+            if clean_dir:
+                util.clean_dir(self.target_dir)
 
         if not os.path.exists(self.target_dir):
             os.makedirs(self.target_dir)
@@ -155,8 +159,8 @@ class ArchiveBinary(ArchiveBase):
     def __init__(self, file_path, arch_type="binary"):
         super(ArchiveBinary, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir):
-        super(ArchiveBinary, self).unpack(target_dir)
+    def unpack(self, target_dir, clean_dir=False):
+        super(ArchiveBinary, self).unpack(target_dir, clean_dir)
 
         # we can't unpack .bin files. we'll just move them to target
         # directory and leave the dirty job to actions.py ;)
@@ -171,8 +175,8 @@ class ArchiveBzip2(ArchiveBase):
     def __init__(self, file_path, arch_type="bz2"):
         super(ArchiveBzip2, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir):
-        super(ArchiveBzip2, self).unpack(target_dir)
+    def unpack(self, target_dir, clean_dir=False):
+        super(ArchiveBzip2, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir):
@@ -197,8 +201,8 @@ class ArchiveGzip(ArchiveBase):
     def __init__(self, file_path, arch_type="gz"):
         super(ArchiveGzip, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir):
-        super(ArchiveGzip, self).unpack(target_dir)
+    def unpack(self, target_dir, clean_dir=False):
+        super(ArchiveGzip, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir):
@@ -223,8 +227,8 @@ class ArchiveLzma(ArchiveBase):
     def __init__(self, file_path, arch_type="lzma"):
         super(ArchiveLzma, self).__init__(file_path, arch_type)
 
-    def unpack(self, target_dir):
-        super(ArchiveLzma, self).unpack(target_dir)
+    def unpack(self, target_dir, clean_dir=False):
+        super(ArchiveLzma, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir):
@@ -259,9 +263,9 @@ class ArchiveTar(ArchiveBase):
         self.no_same_owner = no_same_owner
         self.fileobj = fileobj
 
-    def unpack(self, target_dir):
+    def unpack(self, target_dir, clean_dir=False):
         """Unpack tar archive to a given target directory(target_dir)."""
-        super(ArchiveTar, self).unpack(target_dir)
+        super(ArchiveTar, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir, callback=None):
@@ -297,6 +301,7 @@ class ArchiveTar(ArchiveBase):
             if callback:
                 callback(tarinfo, extracted=False)
 
+            startservices = []
             if tarinfo.issym() and \
                     os.path.isdir(tarinfo.name) and \
                     not os.path.islink(tarinfo.name):
@@ -317,10 +322,41 @@ class ArchiveTar(ArchiveBase):
                                 os.remove(old_path)
                             continue
 
-                        os.renames(old_path, new_path)
-
-                    if os.path.exists(tarinfo.name):
+                        # try as up to this time
+                        try:
+                            os.renames(old_path, new_path)
+                        except OSError as e:
+                            # something gone wrong? [Errno 18] Invalid cross-device link?
+                            # try in other way
+                            if e.errno == errno.EXDEV:
+                                if tarinfo.linkname.startswith(".."):
+                                    new_path = util.join_path(os.path.normpath(os.path.join(os.path.dirname(tarinfo.name), tarinfo.linkname)), filename)
+                                if not old_path.startswith("/"):
+                                    old_path = "/" + old_path
+                                if not new_path.startswith("/"):
+                                    new_path = "/" + new_path
+                                print("Moving:", old_path, " -> ", new_path)
+                                os.system("mv -f %s %s" % (old_path, new_path))
+                            else:
+                                raise
+                    try:
                         os.rmdir(tarinfo.name)
+                    except OSError as e:
+                        # hmmm, not empty dir? try rename it adding .old extension.
+                        if e.errno == errno.ENOTEMPTY:
+                            # if directory with dbus/pid file was moved we have to restart dbus
+                            for (path, dirs, files) in os.walk(tarinfo.name):
+                                if path.endswith("dbus") and "pid" in files:
+                                    startservices.append("dbus")
+                                    for service in ("NetworkManager", "connman", "wicd"):
+                                        if os.path.isfile("/etc/mudur/services/enabled/%s" % service):
+                                            startservices.append(service)
+                                            os.system("service % stop" % service)
+                                    os.system("service dbus stop")
+                                    break
+                            os.system("mv -f %s %s.old" % (tarinfo.name, tarinfo.name))
+                        else:
+                            raise
 
                 elif not os.path.lexists(tarinfo.linkname):
                     # Symlink target does not exist. Assume the old
@@ -339,6 +375,7 @@ class ArchiveTar(ArchiveBase):
 
             try:
                 self.tar.extract(tarinfo)
+                for service in startservices: os.system("service %s start" % service)
             except OSError as e:
                 # Handle the case where an upper directory cannot
                 # be created because of a conflict with an existing
@@ -372,6 +409,27 @@ class ArchiveTar(ArchiveBase):
 
                 # Try to extract again.
                 self.tar.extract(tarinfo)
+
+            except IOError as e:
+                # Handle the case where new path is file, but old path is directory
+                # due to not possible touch file c in /a/b if directory /a/b/c exists.  
+                if not e.errno == errno.EISDIR:
+                    path = tarinfo.name
+                    found = False
+                    while path:
+                        if os.path.isfile(path):
+                            os.unlink(path)
+                            found = True
+                            break
+                        else:
+                            path = "/".join(path.split("/")[:-1])
+                    if not found: raise
+                    # Try to extract again.
+                    self.tar.extract(tarinfo)
+                else:
+                    shutil.rmtree(tarinfo.name)
+                    # Try to extract again.
+                    self.tar.extract(tarinfo)
 
             # tarfile.extract does not honor umask. It must be honored
             # explicitly. See --no-same-permissions option of tar(1),
@@ -439,9 +497,9 @@ class ArchiveTarZ(ArchiveBase):
         self.no_same_permissions = no_same_permissions
         self.no_same_owner = no_same_owner
 
-    def unpack(self, target_dir):
+    def unpack(self, target_dir, clean_dir=False):
         """Unpack tar archive to a given target directory(target_dir)."""
-        super(ArchiveTarZ, self).unpack(target_dir)
+        super(ArchiveTarZ, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir):
@@ -505,8 +563,8 @@ class Archive7Zip(ArchiveBase):
         if not self.cmd:
             raise ArchiveHandlerNotInstalled
 
-    def unpack(self, target_dir):
-        super(Archive7Zip, self).unpack(target_dir)
+    def unpack(self, target_dir, clean_dir=False):
+        super(Archive7Zip, self).unpack(target_dir, clean_dir)
         self.unpack_dir(target_dir)
 
     def unpack_dir(self, target_dir):
@@ -660,8 +718,8 @@ class ArchiveZip(ArchiveBase):
         self.unpack_file_cond(lambda f: util.subpath(path, f),
                               target_dir, path)
 
-    def unpack(self, target_dir):
-        super(ArchiveZip, self).unpack(target_dir)
+    def unpack(self, target_dir, clean_dir=False):
+        super(ArchiveZip, self).unpack(target_dir, clean_dir)
 
         self.unpack_file_cond(lambda f: True, target_dir)
         self.close()
@@ -723,8 +781,8 @@ class Archive:
 
         return "binary"
 
-    def unpack(self, target_dir):
-        self.archive.unpack(target_dir)
+    def unpack(self, target_dir, clean_dir=False):
+        self.archive.unpack(target_dir, clean_dir)
 
     def unpack_files(self, files, target_dir):
         self.archive.unpack_files(files, target_dir)

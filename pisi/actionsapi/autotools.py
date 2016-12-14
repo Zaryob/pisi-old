@@ -14,7 +14,7 @@ import os
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 # Pisi Modules
 import pisi.context as ctx
@@ -26,6 +26,10 @@ from pisi.actionsapi.shelltools import system
 from pisi.actionsapi.shelltools import can_access_file
 from pisi.actionsapi.shelltools import unlink
 from pisi.actionsapi.libtools import gnuconfig_update
+from pisi.actionsapi.shelltools import isDirectory
+from pisi.actionsapi.shelltools import ls
+from pisi.actionsapi.pisitools import dosed
+from pisi.actionsapi.pisitools import removeDir
 
 class ConfigureError(pisi.actionsapi.Error):
     def __init__(self, value=''):
@@ -59,6 +63,7 @@ def configure(parameters = ''):
     if can_access_file('configure'):
         gnuconfig_update()
 
+        prefix = get.emul32prefixDIR() if get.buildTYPE() == "emul32" else get.defaultprefixDIR()
         args = './configure \
                 --prefix=/%s \
                 --build=%s \
@@ -68,10 +73,12 @@ def configure(parameters = ''):
                 --sysconfdir=/%s \
                 --localstatedir=/%s \
                 --libexecdir=/%s \
-                %s' % (get.defaultprefixDIR(), \
-                       get.HOST(), get.manDIR(), \
-                       get.infoDIR(), get.dataDIR(), \
-                       get.confDIR(), get.localstateDIR(), get.libexecDIR(), parameters)
+                %s%s' % (prefix, \
+                         get.HOST(), get.manDIR(), \
+                         get.infoDIR(), get.dataDIR(), \
+                         get.confDIR(), get.localstateDIR(), get.libexecDIR(),
+                         "--libdir=/usr/lib32 " if get.buildTYPE() == "emul32" else "",
+                         parameters)
 
         if system(args):
             raise ConfigureError(_('Configure failed.'))
@@ -101,6 +108,13 @@ def fixInfoDir():
     if can_access_file(infoDir):
         unlink(infoDir)
 
+def fixpc():
+    ''' fix .pc files in installDIR()/usr/lib32/pkgconfig'''
+    path = "%s/usr/lib32/pkgconfig" % get.installDIR()
+    if isDirectory(path):
+        for f in ls("%s/*.pc" % path):
+            dosed(f, get.emul32prefixDIR(), get.defaultprefixDIR())
+
 def install(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters'''
     args = 'make prefix=%(prefix)s/%(defaultprefix)s \
@@ -127,6 +141,9 @@ def install(parameters = '', argument = 'install'):
     else:
         fixInfoDir()
 
+    if get.buildTYPE() == "emul32":
+        fixpc()
+        if isDirectory("%s/emul32" % get.installDIR()): removeDir("/emul32")
 
 def rawInstall(parameters = '', argument = 'install'):
     '''install source into install directory with given parameters = PREFIX=%s % get.installDIR()'''
@@ -134,6 +151,10 @@ def rawInstall(parameters = '', argument = 'install'):
         raise InstallError(_('Install failed.'))
     else:
         fixInfoDir()
+
+    if get.buildTYPE() == "emul32":
+        fixpc()
+        if isDirectory("%s/emul32" % get.installDIR()): removeDir("/emul32")
 
 def aclocal(parameters = ''):
     '''generates an aclocal.m4 based on the contents of configure.in.'''

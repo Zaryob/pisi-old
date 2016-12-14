@@ -27,23 +27,12 @@
 #generateDebug = False
 #enableSandbox = False
 #jobs = "-j3"
-#cflags= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2
-#cxxflags= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2
-#ldflags= -Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common
-#ar = "ar"
-#assembler = "as"
-#cc = "gcc"
-#cxx = "g++"
-#ld = "ld"
-#nm = "nm"
-#ranlib = "ranlib"
-#f77 = "g77"
-#gcj = "gcj"
-#strip = "strip"
-#objcopy= "objcopy"
+#CFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2
+#CXXFLAGS= -mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2
+#LDFLAGS= -Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common
 #buildhelper = None / ccache / icecream
 #compressionlevel = 1
-#fallback = "ftp://ftp.pardus.org.tr/pub/source/2011"
+#fallback = "ftp://ftp.pardus.org.tr/pub/source/2009"
 #
 #[directories]
 #lib_dir = /var/lib/pisi
@@ -77,8 +66,8 @@ class GeneralDefaults:
     destinationdirectory = "/"
     autoclean = False
     distribution = "Pardus"
-    distribution_release = "2011"
-    distribution_id = "p11"
+    distribution_release = "2009"
+    distribution_id = "p9"
     architecture = "i686"
     http_proxy = os.getenv("HTTP_PROXY") or None
     https_proxy = os.getenv("HTTPS_PROXY") or None
@@ -98,24 +87,10 @@ class BuildDefaults:
     enableSandbox = True
     cflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
     cxxflags = "-mtune=generic -march=i686 -O2 -pipe -fomit-frame-pointer -fstack-protector -D_FORTIFY_SOURCE=2"
-
-    # Toolchain defaults
-    ar = "ar"
-    assembler = "as"
-    cc = "gcc"
-    cxx = "g++"
-    ld = "ld"
-    nm = "nm"
-    ranlib = "ranlib"
-    f77 = "g77"
-    gcj = "gcj"
-    strip = "strip"
-    objcopy= "objcopy"
-
     ldflags = "-Wl,-O1 -Wl,-z,relro -Wl,--hash-style=gnu -Wl,--as-needed -Wl,--sort-common"
     buildhelper = None
     compressionlevel = 1
-    fallback = "ftp://ftp.pardus.org.tr/pub/source/2011"
+    fallback = "ftp://ftp.pardus.org.tr/pub/source/2009"
     ignored_build_types = ""
 
 class DirectoriesDefaults:
@@ -129,6 +104,7 @@ class DirectoriesDefaults:
     cached_packages_dir = "/var/cache/pisi/packages"
     compiled_packages_dir = "/var/cache/pisi/packages"
     debug_packages_dir = "/var/cache/pisi/packages-debug"
+    old_paths_cache_dir = "/var/cache/pisi/old-paths"
     packages_dir = "/var/lib/pisi/package"
     lock_dir = "/var/lock/subsys"
     index_dir = "/var/lib/pisi/index"

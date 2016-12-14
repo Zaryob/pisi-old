@@ -18,7 +18,7 @@ import os.path
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 class URI(object):
     """URI class provides a URL parser and simplifies working with

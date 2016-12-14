@@ -44,8 +44,7 @@ class ArchiveTestCase(unittest.TestCase):
         targetDir = '/tmp/tests'
         archives = sourcearchive.SourceArchives(spec)
         archives.fetch(interactive = False)
-        util.clean_dir(targetDir)
-        archives.unpack(targetDir)
+        archives.unpack(targetDir, clean_dir=True)
         del archives
 
         newDir = targetDir + '/newZip'

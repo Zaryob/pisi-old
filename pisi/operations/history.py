@@ -72,7 +72,9 @@ def __getpackageurl(package):
     ctx.ui.info(_("Package %s found in repository %s") % (pkg, reponame))
 
     #return _possible_ url for this package
-    return os.path.join(os.path.dirname(repourl), package)
+    return os.path.join(os.path.dirname(repourl),
+                        pisi.util.parse_package_dir_path(package),
+                        package)
 
 def fetch_remote_file(package, errors):
     try:

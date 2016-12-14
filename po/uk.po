@@ -105,10 +105,10 @@ msgstr "Програму перервано."
 #: pisi-cli:48
 msgid ""
 "Unhandled internal exception.\n"
-"Please file a bug report to <http://bugs.pardus.org.tr>."
+"Please file a bug report to <http://bugs.pisilinux.org>."
 msgstr ""
 "Ноброблено внутрішні винятки.\n"
-"Будь ласка, повідомте про ваду в <http://bugs.pardus.org.tr>."
+"Будь ласка, повідомте про ваду в <http://bugs.pisilinux.org>."
 
 #: pisi-cli:57
 msgid "System error. Program terminated."

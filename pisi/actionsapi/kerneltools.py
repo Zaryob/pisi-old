@@ -82,7 +82,7 @@ def __getExtraVersion():
         # if successful, this is something like:
         # .1 for 2.6.30.1
         # _rc8 for 2.6.30_rc8
-        extraversion = re.split("2.[0-9].[0-9]{2}([._].*)", get.srcVERSION())[1]
+        extraversion = re.split("3.[0-9].[0-9]{2}([._].*)", get.srcVERSION())[1]
     except IndexError:
         # e.g. if version == 2.6.30
         pass
@@ -187,9 +187,10 @@ def install():
 def installHeaders(extraHeaders=None):
     """ Install the files needed to build out-of-tree kernel modules. """
 
-    extras = ["drivers/media/dvb/dvb-core",
-              "drivers/media/dvb/frontends",
-              "drivers/media/video"]
+    extras = ["drivers/media/dvb-core",
+              "drivers/media/dvb-frontends",
+              "drivers/media/tuners",
+              "drivers/media/platform"]
 
     if extraHeaders:
         extras.extend(extraHeaders)
@@ -254,7 +255,18 @@ def installLibcHeaders(excludes=None):
     # Create directories
     shelltools.makedirs(headers_tmp)
     shelltools.makedirs(headers_dir)
-
+    
+    ###################Workaround begins here ...
+    #Workaround information -- http://patches.openembedded.org/patch/33433/
+    cpy_src="%s/linux-*/arch/x86/include/generated" % (get.workDIR())
+    cpy_tgt="%s/arch/x86/include" % (headers_tmp)
+    shelltools.makedirs(cpy_tgt)
+    
+    copy_cmd ="cp -Rv %s %s " % (cpy_src, cpy_tgt)
+    
+    shelltools.system(copy_cmd)
+    #######################Workaround ends here ...
+    
     # make defconfig and install the headers
     autotools.make("%s defconfig" % make_cmd)
     autotools.rawInstall(make_cmd, "headers_install")

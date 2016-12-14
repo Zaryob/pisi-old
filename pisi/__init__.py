@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2016-2017, Aquila Nipalensis
+# Copyright (C) 2005-2011, TUBITAK/UEKAE
 #
 # This program is free software; you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -17,9 +17,8 @@ import sys
 import atexit
 import logging
 import logging.handlers
-import imp
 
-__version__ = "3.0.1"
+__version__ = "2.4"
 
 __all__ = [ 'api', 'configfile', 'db']
 
@@ -60,9 +59,9 @@ def _cleanup():
         ctx.loghandler.flush()
         ctx.log.removeHandler(ctx.loghandler)
 
-    filesdb = pisi.db.filesdb.FilesDB()
-    if filesdb.is_initialized():
-        filesdb.close()
+#    filesdb = pisi.db.filesdb.FilesDB()
+#    if filesdb.is_initialized():
+#        filesdb.close()
 
     if ctx.build_leftover and os.path.exists(ctx.build_leftover):
         os.unlink(ctx.build_leftover)
@@ -72,7 +71,7 @@ def _cleanup():
 
 # Hack for pisi to work with non-patched Python. pisi needs
 # lots of work for not doing this.
-imp.reload(sys)
+reload(sys)
 sys.setdefaultencoding('utf-8')
 
 atexit.register(_cleanup)

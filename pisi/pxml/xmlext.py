@@ -24,15 +24,13 @@
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.gettext
+_ = __trans.ugettext
 
 import pisi
-#import piksemel as iks
-import xml
-import xml.dom.minidom as minidom
+import piksemel as iks
 
-parse = minidom.parse
-newDocument = xml.dom.minidom.DOMImplementation.createDocument
+parse = iks.parse
+newDocument = iks.newDocument
 
 def getAllNodes(node, tagPath):
     """retrieve all nodes that match a given tag path."""
@@ -41,7 +39,7 @@ def getAllNodes(node, tagPath):
         return []
     nodeList = [node] # basis case
     for tag in tags:
-        results = [getElementsByTagName(x, tag) for x in nodeList]
+        results = [getTagByName(x, tag) for x in nodeList]
         nodeList = []
         for x in results:
             nodeList.extend(x)
@@ -60,10 +58,10 @@ def setNodeAttribute(node, attrname, value):
 
 def getChildElts(parent):
     """get only child elements"""
-    return [x for x in parent.tag()]
+    return [x for x in parent.tags()]
 
 def getTagByName(parent, childName):
-    return [x for x in parent.tag(childName)]
+    return [x for x in parent.tags(childName)]
 
 def getNodeText(node, tagpath = ""):
     """get the first child and expect it to be text!"""
@@ -71,10 +69,10 @@ def getNodeText(node, tagpath = ""):
         node = getNode(node, tagpath)
         if not node:
             return None
-    child = node.firstChild
+    child = node.firstChild()
     if not child:
         return None
-    if child.type() == minidom.DATA:
+    if child.type() == iks.DATA:
         # in any case, strip whitespaces...
         return child.data().strip()
     else:
@@ -87,7 +85,6 @@ def getChildText(node_s, tagpath):
         return None
     return getNodeText(node)
 
-#su kisma bir el atilacak
 def getNode(node, tagpath):
     """returns the *first* matching node for given tag path."""
 
@@ -101,7 +98,7 @@ def getNode(node, tagpath):
     # iterative code to search for the path
     for tag in tags:
         currentNode = None
-        for child in node.tag():
+        for child in node.tags():
             if child.name() == tag:
                 currentNode = child
                 break
@@ -117,7 +114,7 @@ def createTagPath(node, tags):
     if len(tags)==0:
         return node
     for tag in tags:
-        node = node.createElement(tag)
+        node = node.insertTag(tag)
     return node
 
 def addTagPath(node, tags, newnode=None):
@@ -150,7 +147,7 @@ def addNode(node, tagpath, newnode = None, branch=True):
 
     while len(tags) > rem:
         tag = tags.pop(0)
-        nodeList = getElementsByTagName(node, tag)
+        nodeList = getTagByName(node, tag)
         if len(nodeList) == 0:          # couldn't find
             tags.insert(0, tag)         # put it back in
             return addTagPath(node, tags, newnode)
@@ -167,4 +164,4 @@ def addText(node, tagpath, text):
     node.insertData(text)
 
 def newNode(node, tag):
-    return minidom.createDocument(tag)
+    return iks.newDocument(tag)
