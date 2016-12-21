@@ -16,6 +16,7 @@ import time
 import pisi.context as ctx
 import pisi.util as util
 
+
 # lower borks for international locales. What we want is ascii lower.
 lower_map = bytes.maketrans(string.ascii_uppercase, string.ascii_lowercase)
 
