@@ -16,9 +16,11 @@ import time
 import pisi.context as ctx
 import pisi.util as util
 
-
+import string
 # lower borks for international locales. What we want is ascii lower.
-lower_map = bytes.maketrans(string.ascii_uppercase, string.ascii_lowercase)
+ascii_upper= string.ascii_uppercase
+ascii_lower= string.ascii_lowercase
+lower_map = bytes.maketrans(ascii_upper, ascii_lower)
 
 class Singleton(object):
     _the_instances = {}

@@ -336,7 +336,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.__init__ = initialize
 
         cls.decoders = decoders
-        def decode(self, node, errs, where = str(cls.tag)):
+        def decode(self, node, errs, where = cls.tag):
             for base in cls.autoxml_bases:
                 base.decode(self, node, errs, where)
             for decode_member in decoders:#self.__class__.decoders:
@@ -356,7 +356,7 @@ class autoxml(oo.autosuper, oo.autoprop):
         cls.encode = encode
 
         cls.errorss = errorss
-        def errors(self, where = str(name)):
+        def errors(self, where = name):
             errs = []
             for base in cls.autoxml_bases:
                 errs.extend(base.errors(self, where))
