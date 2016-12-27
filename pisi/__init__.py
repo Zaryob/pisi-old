@@ -17,6 +17,7 @@ import sys
 import atexit
 import logging
 import logging.handlers
+import imp 
 
 __version__ = "2.4"
 
@@ -71,8 +72,8 @@ def _cleanup():
 
 # Hack for pisi to work with non-patched Python. pisi needs
 # lots of work for not doing this.
-reload(sys)
-sys.setdefaultencoding('utf-8')
+imp.reload(sys)
+
 
 atexit.register(_cleanup)
 

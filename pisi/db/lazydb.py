@@ -18,8 +18,8 @@ import pisi.util as util
 
 import string
 # lower borks for international locales. What we want is ascii lower.
-ascii_upper= b(string.ascii_uppercase)
-ascii_lower= b(string.ascii_lowercase)
+ascii_upper= string.ascii_uppercase.encode('utf-8')
+ascii_lower= string.ascii_lowercase.encode('utf-8')
 lower_map = bytes.maketrans(ascii_upper, ascii_lower)
 
 class Singleton(object):

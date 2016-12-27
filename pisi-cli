@@ -9,7 +9,7 @@
 #
 # Please read the COPYING file.
 #
-
+import deneme
 import sys
 import errno
 import traceback
