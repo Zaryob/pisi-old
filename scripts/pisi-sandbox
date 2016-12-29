@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2009-2011 TUBITAK/UEKAE
@@ -45,10 +45,10 @@ def chroot_comar(image_dir):
 
 # run command and terminate if something goes wrong
 def run(cmd, ignore_error=False):
-    print cmd
+    print(cmd)
     ret = os.system(cmd)
     if ret and not ignore_error:
-        print "%s returned %s" % (cmd, ret)
+        print("%s returned %s" % (cmd, ret))
         sys.exit(1)
 
 def create_sandbox(output_dir, repository):

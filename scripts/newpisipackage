@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # just put a .pisipackager file in your home and fill it like
@@ -159,7 +159,7 @@ temp_postscript = '''#/usr/bin/python
 import os
 
 def postInstall():
-    print "FIXME"
+    print("FIXME")
 
 '''
 
@@ -179,7 +179,7 @@ def write(filename, data):
        f.write(data)
        f.close()
     except:
-        print "Could not write file %s/%s" % (target, filename)
+        print ("Could not write file %s/%s" % (target, filename))
 
 
 def create_dirs():
@@ -187,7 +187,7 @@ def create_dirs():
         os.makedirs("%s/files" % target)
         os.makedirs("%s/comar" % target)
     except:
-        print "Could not make directory %s" % target
+        print ("Could not make directory %s" % target)
         sys.exit(1)
 
 def readConfig():
@@ -210,7 +210,7 @@ def readConfig():
 
 # some checks
 if len(sys.argv) < 2:
-    print "Usage : %s NewPackageDir" % sys.argv[0]
+    print("Usage : %s NewPackageDir" % sys.argv[0])
     sys.exit(0)
 else:
     target = sys.argv[1]
@@ -218,10 +218,10 @@ else:
     data["package_cap"] = string.capitalize(data["package"])
 
 if os.path.exists(target):
-    print "%s already exists, please remove it first" % target
+    print("%s already exists, please remove it first" % target)
     sys.exit(1)
 elif " " in data["package"]:
-    print "You should not use empty space in package name"
+    print("You should not use empty space in package name")
     sys.exit(1)
 
 # here we go

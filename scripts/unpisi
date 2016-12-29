@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2006-2010, TUBITAK/UEKAE
@@ -17,12 +17,12 @@ from zipfile import BadZipfile
 from pisi.package import Package
 
 def usage(errmsg):
-    print """
+    print ("""
     Error: %s
 
     Usage:
       unpisi PiSi_package.pisi [target_dir]
-    """ % (errmsg)
+    """ % (errmsg))
 
     sys.exit(1)
 
@@ -36,7 +36,7 @@ def main():
 
     try:
         package = Package(sys.argv[1])
-    except BadZipfile, e:
+    except BadZipfile as e:
         print e
         sys.exit(1)
 

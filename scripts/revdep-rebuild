@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Author: Marcin Bojara <marcin@pisilinux.org>
@@ -58,15 +58,15 @@ if __name__ == "__main__":
     if not options.soname and not options.soname_regexp and not options.package:
         search_broken = True
     elif options.soname and options.soname_regexp:
-        print "%suse --soname and --soname-regexp separately%s" % (RD, NO)
+        print("%suse --soname and --soname-regexp separately%s" % (RD, NO))
         sys.exit(1)
     elif options.package and (options.soname or options.soname_regexp):
-        print "%suse --package and (--soname or --soname-regexp) separately%s" % (RD, NO)
+        print("%suse --package and (--soname or --soname-regexp) separately%s" % (RD, NO))
         sys.exit(1)
     else:
         search_broken = False
 
-    print "\n%sCollecting installed packages and files...%s" % (GR, NO)
+    print("\n%sCollecting installed packages and files...%s" % (GR, NO))
 
     installdb = InstallDB()
     idb = installdb.installed_db
@@ -79,9 +79,9 @@ if __name__ == "__main__":
         pkgfs[pkg] = re.compile('<Path>(.*?)</Path>', re.I).findall(files_xml)
         pkgls[pkg] = re.compile('<Path>(.*?\.so[\.\d]*)</Path>', re.I).findall(files_xml)
 
-    print "  done."
+    print("  done.")
 
-    print "\n%sCollecting old paths info...%s" % (GR, NO)
+    print("\n%sCollecting old paths info...%s" % (GR, NO))
 
     oldpkgfs = {}
     try:
@@ -92,9 +92,9 @@ if __name__ == "__main__":
                     paths = [l.strip() for l in f.readlines()]
                 oldpkgfs["%s-%s (previous)" % (ls, ver)] = paths
     except AttributeError:
-        print "%sYour pisi version is too old.%s" % (GR, NO)
+        print("%sYour pisi version is too old.%s" % (GR, NO))
 
-    print "  done."
+    print("  done.")
 
     if search_broken:
         soname_search = ["not"]
@@ -107,7 +107,7 @@ if __name__ == "__main__":
             try:
                 soname_search = [os.path.basename(p) for p in pkgls[args[0]]]
             except KeyError:
-                print "%s Package %s not found!%s" % (RD, args[0], NO)
+                print("%s Package %s not found!%s" % (RD, args[0], NO))
                 sys.exit(1)
         else:
             soname_search = args
@@ -119,13 +119,13 @@ if __name__ == "__main__":
         ok_text = "There are no dynamic links to %s" % sonames
         working_text = ""
 
-    print "\nChecking reverse dependencies..."
-    if options.package: print "  libs:", ", ".join(sorted(soname_search))
+    print("\nChecking reverse dependencies..."
+    if options.package: print "  libs:", ", ".join(sorted(soname_search)))
 
-    print "\n%sCollecting system binaries and libraries...%s" % (GR, NO)
+    print("\n%sCollecting system binaries and libraries...%s" % (GR, NO))
 
     if os.path.isfile("%s.1_files" % llist):
-        print "  using existing %s.1_files." % llist
+        print("  using existing %s.1_files." % llist)
         with open("%s.1_files" % llist) as f:
             ffiles = [l.strip() for l in f.readlines()]
     else:
@@ -139,12 +139,12 @@ if __name__ == "__main__":
                         ffiles.append(path)
         ffiles = sorted(ffiles)
         open("%s.1_files" % llist, "w").write("\n".join(ffiles))
-    print "  done. (%s.1_files)" % llist
+    print("  done. (%s.1_files)" % llist)
 
     if search_broken:
-        print "\n%sCollecting complete LD_LIBRARY_PATH...%s" % (GR, NO)
+        print("\n%sCollecting complete LD_LIBRARY_PATH...%s" % (GR, NO))
         if os.path.isfile("%s.2_ldpath" % llist):
-            print "  using existing %s.2_ldpath." % llist
+            print("  using existing %s.2_ldpath." % llist)
             with open("%s.2_ldpath" % llist) as f:
                 ldpaths = f.readline().split(":")
         else:
@@ -160,12 +160,12 @@ if __name__ == "__main__":
             ldpaths = sorted(ldpaths)
             open("%s.2_ldpath" % llist, "w").write(":".join(ldpaths))
         os.environ["COMPLETE_LD_LIBRARY_PATH"] = ":".join(ldpaths)
-        print "  done. (%s.2_ldpath)" % llist
+        print("  done. (%s.2_ldpath)" % llist)
 
-    print "\n%sChecking dynamic linking%s...%s" % (GR, working_text, NO)
+    print("\n%sChecking dynamic linking%s...%s" % (GR, working_text, NO))
 
     if os.path.isfile("%s.3_rebuild" % llist):
-        print "  using existing %s.3_rebuild." % llist
+        print("  using existing %s.3_rebuild." % llist)
         with open("%s.3_rebuild" % llist) as f:
             rebuild = dict((l, p.strip().split(";")) for l, p in [line.split(":") for line in f.readlines()])
     else:
@@ -198,12 +198,12 @@ if __name__ == "__main__":
                             rebuild[src] = [f]
 
         open("%s.3_rebuild" % llist, "w").write("\n".join(["%s:%s" % (l, ";".join(p)) for l, p in sorted(rebuild.items())]))
-    print "  done. (%s.3_rebuild)" % llist
+    print("  done. (%s.3_rebuild)" % llist)
 
-    print "\n%sDetermining package names%s...%s" % (GR, working_text, NO)
+    print("\n%sDetermining package names%s...%s" % (GR, working_text, NO))
 
     if os.path.isfile("%s.4_lnames" % llist) and os.path.isfile("%s.4_rdnames" % llist):
-        print "  using existing %s.4_names." % llist
+        print("  using existing %s.4_names." % llist)
         with open("%s.4_lnames" % llist) as f:
             lnames = dict((l, p.strip().split(";")) for l, p in [line.split(":") for line in f.readlines()])
         with open("%s.4_rdnames" % llist) as f:
@@ -230,9 +230,9 @@ if __name__ == "__main__":
                 for path in paths:
                     if path[1:] in fs:
                         try:
-                            print "  %s has %s and it needs %s from %s" % (pkg, path, lib, " | ".join(lnames[lib]))
+                            print("  %s has %s and it needs %s from %s" % (pkg, path, lib, " | ".join(lnames[lib])))
                         except KeyError:
-                            print "%s  %s has %s and it needs %s, but %s not belongs to any installed package.%s" % (YL, pkg, path, lib, lib, NO)
+                            print("%s  %s has %s and it needs %s, but %s not belongs to any installed package.%s" % (YL, pkg, path, lib, lib, NO))
                         try:
                             if not pkg in rdnames[lib]: rdnames[lib].append(pkg)
                         except KeyError:
@@ -240,4 +240,4 @@ if __name__ == "__main__":
 
         open("%s.4_lnames" % llist, "w").write("\n".join(["%s:%s" % (l, ";".join(p)) for l, p in sorted(lnames.items())]))
         open("%s.4_rdnames" % llist, "w").write("\n".join(["%s:%s" % (l, ";".join(p)) for l, p in sorted(rdnames.items())]))
-    print "  done. (%s.4_lnames, %s.4_rdnames)" % (llist, llist)
+    print("  done. (%s.4_lnames, %s.4_rdnames)" % (llist, llist))
