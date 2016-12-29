@@ -1,12 +1,50 @@
+2016-12-28 Aquila Nipalensis <nipalensisaquila@gmail.com>
+	*Ilk kez canlı ortamda deneme yapildi.
+	*Yapabildikleri:
+	|-->Kurulu paketleri listeleyebildi.
+	|-->Eldeki paketin versiyon bilgisi alabildi.
+	|-->Serverden repo index'i alabildi.
+	|-->Diskten repo indexi aldi ama depo olarak eklemedi.
+	|-->Ana depodan güncelleme bilgisi alabildi
+	|-->Depodan paket alabildi.
+	|-->Depodan çektiği paketlerin hepsini kurdu.
+	|-->closed-source yazilimlar bulunan depodan index aldi
+	|-->emup ile yukleme yapmayi denedim ama sertifika hatasi verdi(internet problemli)
+	|-->Paket olusturma denemesi yapildi. 
+	|-->20 paket denemesinden 13u basarili oldu. Basarisizlardan aldigim hata plyvel ile ilgili
+	|-->Scriptlerin pek cogu calisti.
+	|-->docker ile derleme yapilamadi :(
+	|____
+
+
+	*Genel hatalar:
+	|-->Paket build asamasinda asamasinda binaenaleyh emup ile paket kurmada hata:
+	|   \_Hatanin nedeni plymount ve pisi.actionsapi.shelltoolsdaki system 
+	|     fonksiyonunda duzeltilmesi gereken hata var.
+	|-->Paket indirilirken ciktida hos olmayan bisey var
+	|   \_Dongude hata olmus. Paket inene kadar satirlarca kez indiriliyor yaziyor :D
+	|-->Comar import edilemedigi icin pakette comar betigi varsa pisi aniden kapaniyor :(
+	|   \_comar'i tez elden duzeltmem lazim
+	|____
+
+2016-12-26 Aquila Nipalensis <nipalensisaquila@gmail.com>   
+	*Catbox python3'de calistirildi... testler basarili...
+
+2016-12-26 Aquila Nipalensis <nipalensisaquila@gmail.com>   
+	*Moduller sorunsuz import edildi.
+	*Runtime bagimliligi varmis bu timbirtinin. catbox... Onu elden gecirmem lazim
+
 2016-12-24 Aquila Nipalensis <nipalensisaquila@gmail.com>   
-	*Birkac error haric bitti 
+	*Birkac error haric bitti gibi gibi.
 	
 2016-12-20 Aquila Nipalensis <nipalensisaquila@gmail.com>
-	*piksemel halledildi artık tek problem bir iki çeviri hatası
+	*piksemel python3'de calisiyor. Append yerine bazi yerlerde
+	insert kullanamiz lazim hepsi o. Runtime error aliyoruz yoksa
 	
 2016-12-06 Aquila Nipalensis <nipalensisaquila@gmail.com>
 	*xml dosyalarini okuyan moduller lxml ile yeniden yazilmaya baslandi
+	*Ne kadar basarili olur inanin bilmiyorum :(
 
 2016:11:19 Aquila Nipalensis <nipalensisaquila@gmail.com>
-	*Bitirilen pisi projesi Python3'e gecirilmeye baslandi
+	*Pardus 2011'den sonra Tubitak bazida bitirilen pisi projesi Python3'e gecirilmeye baslandi
 
