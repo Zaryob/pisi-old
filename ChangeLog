@@ -13,10 +13,8 @@
 	|-->Paket olusturma denemesi yapildi. 
 	|-->20 paket denemesinden 13u basarili oldu. Basarisizlardan aldigim hata plyvel ile ilgili
 	|-->Scriptlerin pek cogu calisti.
-	|-->docker ile derleme yapilamadi :(
-	|____
-
-
+	\-->docker ile derleme yapilamadi :(
+	
 	*Genel hatalar:
 	|-->Paket build asamasinda asamasinda binaenaleyh emup ile paket kurmada hata:
 	|   \_Hatanin nedeni plymount ve pisi.actionsapi.shelltoolsdaki system 
@@ -24,8 +22,8 @@
 	|-->Paket indirilirken ciktida hos olmayan bisey var
 	|   \_Dongude hata olmus. Paket inene kadar satirlarca kez indiriliyor yaziyor :D
 	|-->Comar import edilemedigi icin pakette comar betigi varsa pisi aniden kapaniyor :(
-	|   \_comar'i tez elden duzeltmem lazim
-	|____
+	|__ \_comar'i tez elden duzeltmem lazim
+
 
 2016-12-26 Aquila Nipalensis <nipalensisaquila@gmail.com>   
 	*Catbox python3'de calistirildi... testler basarili...
