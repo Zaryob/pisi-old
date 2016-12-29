@@ -19,7 +19,7 @@ import grp
 
 import gettext
 __trans = gettext.translation('pisi', fallback=True)
-_ = __trans.ugettext
+_ = __trans.gettext
 
 # Pisi Modules
 import pisi.context as ctx
@@ -246,6 +246,8 @@ def dirName(filePath):
     '''return the directory name of pathname path'''
     return os.path.dirname(filePath)
 
+##Fix me:there are an important error in here please##
+##         fix here tomorrow (don't forget)         ##
 def system(command):
     command = string.join(string.split(command))
     retValue = run_logged(command)
