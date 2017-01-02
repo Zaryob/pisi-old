@@ -12,6 +12,7 @@
 
 from . import testcase
 import pisi
+import pisi.db.filesdb
 
 class FilesDBTestCase(testcase.TestCase):
 
