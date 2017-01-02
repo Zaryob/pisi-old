@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # Copyright (C) 2005 - 2010, TUBITAK/UEKAE
 #
@@ -9,11 +9,9 @@
 #
 # Please read the COPYING file.
 #
-import deneme
 import sys
 import errno
 import traceback
-import exceptions
 import signal
 
 import pisi
@@ -34,14 +32,15 @@ def exit():
     sys.exit(1)
 
 def handle_exception(exception, value, tb):
-    signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
-    ui = pisi.cli.CLI() # make a temporary UI
-    show_traceback = False
+    try:
+        signal.signal(signal.SIGINT, signal.SIG_IGN)   # disable further interrupts
+        ui = pisi.cli.CLI() # make a temporary UI
+        show_traceback = False
 
-    if exception == exceptions.KeyboardInterrupt:
+    except KeyboardInterrupt:
         ui.error(_("Keyboard Interrupt: Exiting..."))
         exit()
-    elif isinstance(value, pisi.Error):
+    if isinstance(value, pisi.Error):
         ui.error(_("Program terminated."))
     elif isinstance(value, pisi.Exception):
         show_traceback = True
