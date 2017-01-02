@@ -183,7 +183,7 @@ class Command(object):
     def help(self):
         """print help for the command"""
         trans = gettext.translation('pisi', fallback=True)
-        print("%s: %s\n" % (self.format_name(), trans.ugettext(self.__doc__)))
+        print("%s: %s\n" % (self.format_name(), trans.gettext(self.__doc__)))
         print(self.parser.format_option_help())
 
     def die(self):

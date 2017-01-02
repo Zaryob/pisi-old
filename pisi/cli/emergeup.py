@@ -75,7 +75,7 @@ You can also give the name of a component.
             ctx.ui.info(_('Outputting binary packages in the package cache.'))
             ctx.config.options.output_dir = ctx.config.cached_packages_dir()
 
-	repos = pisi.api.list_repos()
+        repos = pisi.api.list_repos()
         pisi.api.update_repos(repos, ctx.get_option('force'))
 	
         pisi.api.emerge(emerge_up_list)

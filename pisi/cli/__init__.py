@@ -37,7 +37,7 @@ def printu(obj, err = False):
         out = sys.stderr
     else:
         out = sys.stdout
-    out.write(obj.encode('utf-8'))
+    out.write(obj)
     out.flush()
 
 class CLI(pisi.ui.UI):
@@ -56,11 +56,9 @@ class CLI(pisi.ui.UI):
             if type(msg)==type(str()):
                 msg = msg.encode('utf-8')
             if err:
-                out = sys.stderr
+                sys.stderr.write(msg)
             else:
-                out = sys.stdout
-            out.write(msg)
-            out.flush()
+                print(msg)
 
     def formatted_output(self, msg, verbose = False, noln = False, column=":"):
         key_width = 20

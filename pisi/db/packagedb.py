@@ -65,7 +65,12 @@ class PackageDB(lazydb.LazyDB):
         return [x.firstChild().data() for x in obsoletes.tags("Package")]
 
     def __generate_packages(self, doc):
-        return dict([(x.getTagData("Name"), gzip.zlib.compress(x.toString())) for x in doc.tags("Package")])
+        #return dict([(x.getTagData("Name"), gzip.zlib.compress(x.toString())) for x in doc.tags("Package")])
+        
+        dict={}
+        for x in doc.tags("Packages"):
+            dict[x.getTagData("Name")]= gzip.zlib.compress(x.toString())
+        return dict
 
     def __generate_revdeps(self, doc):
         revdeps = {}

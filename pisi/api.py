@@ -53,7 +53,7 @@ def locked(func):
     """
     def wrapper(*__args,**__kw):
         try:
-            lock = file(pisi.util.join_path(pisi.context.config.lock_dir(), 'pisi'), 'w')
+            lock = open(pisi.util.join_path(pisi.context.config.lock_dir(), 'pisi'), 'w')
         except IOError:
             raise pisi.errors.PrivilegeError(_("You have to be root for this operation."))
 
