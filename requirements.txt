@@ -1,0 +1,10 @@
+tar
+file
+plyvel
+gettext
+leveldb 
+iksemel
+urlgrabber
+python-psutil
+libunwind
+python-pyliblzma
