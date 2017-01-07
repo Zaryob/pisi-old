@@ -18,9 +18,8 @@ Some of its distinctive features:
 
 Build Dependencies:
 
-* comar
 * plyvel
-* python 2.7
+* python 3.4
 * gettext
 * libunwind-devel
 * intltool
@@ -31,15 +30,12 @@ Runtime Dependencies:
 
 * tar
 * file
-* comar
 * plyvel
 * python
 * gettext
 * leveldb 1.8
 * piksemel
-* comar-api
 * urlgrabber
 * python-psutil
 * libunwind
 * python-pyliblzma
-* mudur 4.4.0

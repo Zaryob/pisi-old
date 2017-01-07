@@ -208,13 +208,13 @@ class RepoDB(lazydb.LazyDB):
         return repos
 
     def list_repos(self, only_active=True): 
-        only_active = True
         temp = []
         for x in self.repoorder.get_order():
             if not only_active:
-                temp.append[i]
+                temp.append[x]
             elif self.repo_active(x) == True:
-                temp.append(i)
+                temp.append(x)
+        return temp 
 
     def list_repo_urls(self, only_active=True):
         repos = []
