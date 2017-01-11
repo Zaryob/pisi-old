@@ -1,0 +1,1527 @@
+EEEE/usr/lib/python3.4/site-packages/pisi/db/repodb.py:189: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/index/pardus-2007/uri' mode='w' encoding='UTF-8'>
+  open(urifile_path, "w").write(repo_info.indexuri.get_uri())
+/usr/lib/python3.4/site-packages/pisi/db/repodb.py:116: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/info/repos' mode='w' encoding='UTF-8'>
+  open(repos_file, "w").write("%s\n" % doc.toPrettyString())
+/usr/lib/python3.4/site-packages/pisi/db/repodb.py:182: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/index/pardus-2007/uri' mode='r' encoding='UTF-8'>
+  uri = open(urifile_path, "r").read()
+/usr/lib/python3.4/site-packages/pisi/db/repodb.py:189: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/index/contrib-2007/uri' mode='w' encoding='UTF-8'>
+  open(urifile_path, "w").write(repo_info.indexuri.get_uri())
+/usr/lib/python3.4/site-packages/pisi/db/repodb.py:182: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/index/contrib-2007/uri' mode='r' encoding='UTF-8'>
+  uri = open(urifile_path, "r").read()
+/usr/lib/python3.4/site-packages/pisi/db/repodb.py:189: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/index/pardus-2007-src/uri' mode='w' encoding='UTF-8'>
+  open(urifile_path, "w").write(repo_info.indexuri.get_uri())
+E/usr/lib/python3.4/site-packages/pisi/db/repodb.py:182: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/index/pardus-2007-src/uri' mode='r' encoding='UTF-8'>
+  uri = open(urifile_path, "r").read()
+EEEFFF......E/usr/lib/python3.4/site-packages/pisi/db/repodb.py:189: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/index/repo1/uri' mode='w' encoding='UTF-8'>
+  open(urifile_path, "w").write(repo_info.indexuri.get_uri())
+EEE.EEEEEEEEEEEEEE.E.....EEEEEEEEEEEEEEEEEEEEEEE.......F....EEE/usr/lib/python3.4/site-packages/pisi/mirrors.py:39: ResourceWarning: unclosed file <_io.TextIOWrapper name='mirrors.conf' mode='r' encoding='UTF-8'>
+  for line in open(config, "r").readlines():
+./usr/lib/python3.4/site-packages/pisi/db/repodb.py:182: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/index/repo1/uri' mode='r' encoding='UTF-8'>
+  uri = open(urifile_path, "r").read()
+FEE.EEFF.E..EE/usr/lib/python3.4/site-packages/pisi/db/repodb.py:189: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/index/test-repo/uri' mode='w' encoding='UTF-8'>
+  open(urifile_path, "w").write(repo_info.indexuri.get_uri())
+./usr/lib/python3.4/site-packages/pisi/db/repodb.py:189: ResourceWarning: unclosed file <_io.TextIOWrapper name='/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/repos/tmp/var/lib/pisi/index/contrib-2007-src/uri' mode='w' encoding='UTF-8'>
+  open(urifile_path, "w").write(repo_info.indexuri.get_uri())
+.F.FFF..../media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/shelltest.py:37: ResourceWarning: unclosed file <_io.TextIOWrapper name='tests/echo-file' mode='r' encoding='UTF-8'>
+  self.assertEqual(open('tests/echo-file').readlines()[0].strip(), 'eco subject')
+/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/shelltest.py:39: ResourceWarning: unclosed file <_io.TextIOWrapper name='tests/echo-file' mode='r' encoding='UTF-8'>
+  self.assertEqual(open('tests/echo-file').readlines()[1].strip(), 'subject eco')
+...F..FEFEEEEEEEFFFEEEE...........F.....E...
+======================================================================
+ERROR: testMakeZip (archivetests.ArchiveTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/archivetests.py", line 43, in testMakeZip
+    spec = SpecFile('repos/pardus-2007/system/base/openssl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 334, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 449, in read
+    self.decode(self.rootNode(), errs)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 343, in decode
+    decode_member(self, node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 557, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + str(name)))
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 701, in decode
+    obj.decode(node, errs, where)
+AttributeError: 'Source' object has no attribute 'decode'
+
+======================================================================
+ERROR: testTarUnpack (archivetests.ArchiveTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/archivetests.py", line 14, in testTarUnpack
+    spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 334, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testUnpackTarCond (archivetests.ArchiveTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/archivetests.py", line 23, in testUnpackTarCond
+    spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 334, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testZipUnpack (archivetests.ArchiveTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/archivetests.py", line 35, in testZipUnpack
+    spec = SpecFile('repos/pardus-2007/system/base/openssl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 334, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 449, in read
+    self.decode(self.rootNode(), errs)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 343, in decode
+    decode_member(self, node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 557, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + str(name)))
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 701, in decode
+    obj.decode(node, errs, where)
+AttributeError: 'Source' object has no attribute 'decode'
+
+======================================================================
+ERROR: testGetComponent (database.componentdbtest.ComponentDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/componentdbtest.py", line 19, in setUp
+    testcase.TestCase.setUp(self)
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/testcase.py", line 21, in setUp
+    pisi.api.update_repo("pardus-2007")
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 832, in update_repo
+    pisi.db.historydb.HistoryDB().create_history("repoupdate")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetPackages (database.componentdbtest.ComponentDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/componentdbtest.py", line 56, in testGetPackages
+    packages = self.componentdb.get_packages("applications.network")
+  File "/usr/lib/python3.4/site-packages/pisi/db/componentdb.py", line 128, in get_packages
+    component = self.get_component(component_name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/componentdb.py", line 87, in get_component
+    raise Exception(_('Component %s not found') % component_name)
+Exception: applications.network bileşeni bulunamadı.
+
+======================================================================
+ERROR: testGetUnionComponent (database.componentdbtest.ComponentDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/componentdbtest.py", line 50, in testGetUnionComponent
+    component = self.componentdb.get_union_component("applications.network")
+  File "/usr/lib/python3.4/site-packages/pisi/db/componentdb.py", line 108, in get_union_component
+    component.parse(self.cdb.get_item(component_name))
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 53, in get_item
+    item, repo = self.get_item_repo(item, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 50, in get_item_repo
+    raise Exception(_("Repo item %s not found") % str(item))
+Exception: Depo elemanı applications.network bulunamadı.
+
+======================================================================
+ERROR: testGetUnionPackages (database.componentdbtest.ComponentDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/componentdbtest.py", line 69, in testGetUnionPackages
+    packages = self.componentdb.get_union_packages("applications.network")
+  File "/usr/lib/python3.4/site-packages/pisi/db/componentdb.py", line 148, in get_union_packages
+    component = self.get_union_component(component_name)
+  File "/usr/lib/python3.4/site-packages/pisi/db/componentdb.py", line 108, in get_union_component
+    component.parse(self.cdb.get_item(component_name))
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 53, in get_item
+    item, repo = self.get_item_repo(item, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 50, in get_item_repo
+    raise Exception(_("Repo item %s not found") % str(item))
+Exception: Depo elemanı applications.network bulunamadı.
+
+======================================================================
+ERROR: testCalculateConflicts (conflicttests.ConflictTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/conflicttests.py", line 21, in testCalculateConflicts
+    assert pisi.conflict.calculate_conflicts(packages, packagedb)
+  File "/usr/lib/python3.4/site-packages/pisi/conflict.py", line 68, in calculate_conflicts
+    pkg = packagedb.get_package(x)
+  File "/usr/lib/python3.4/site-packages/pisi/db/packagedb.py", line 89, in get_package
+    pkg, repo = self.get_package_repo(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/packagedb.py", line 162, in get_package_repo
+    pkg, repo = self.pdb.get_item_repo(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 50, in get_item_repo
+    raise Exception(_("Repo item %s not found") % str(item))
+Exception: Depo elemanı ethtool bulunamadı.
+
+======================================================================
+ERROR: testConflictCheck (conflicttests.ConflictTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/conflicttests.py", line 27, in testConflictCheck
+    pisi.api.update_repo("repo1")
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 832, in update_repo
+    pisi.db.historydb.HistoryDB().create_history("repoupdate")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testInstalledPackageConflicts (conflicttests.ConflictTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/conflicttests.py", line 10, in testInstalledPackageConflicts
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testInterRepoCrossConflicts (conflicttests.ConflictTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/conflicttests.py", line 44, in testInterRepoCrossConflicts
+    pisi.api.add_repo("repo1", "repos/repo1-bin/pisi-index.xml")
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 798, in add_repo
+    raise pisi.Error(_('Repo %s already present.') % name)
+pisi.Error: repo1 deposu zaten mevcut.
+
+======================================================================
+ERROR: testDictSatisfiesDep (dependencytest.DependencyTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/dependencytest.py", line 8, in testDictSatisfiesDep
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testInstalledSatisfiesDep (dependencytest.DependencyTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/dependencytest.py", line 23, in testInstalledSatisfiesDep
+    pisi.api.install(["ctorrent"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testRepoSatisfiesDependency (dependencytest.DependencyTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/dependencytest.py", line 30, in testRepoSatisfiesDependency
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testFetch (fetchtest.FetchTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/fetchtest.py", line 16, in setUp
+    self.spec.read('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testFetcherFunctions (fetchtest.FetchTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/fetchtest.py", line 16, in setUp
+    self.spec.read('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testChooseMethod (filetest.FileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/filetest.py", line 17, in testChooseMethod
+    compress = File('repos/contrib-2007/pisi-index.xml', File.read)
+  File "/usr/lib/python3.4/site-packages/pisi/file.py", line 205, in __init__
+    self.__file__ = open(localfile, access)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/contrib-2007/pisi-index.xml'
+
+======================================================================
+ERROR: testDecompress (filetest.FileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/filetest.py", line 21, in testDecompress
+    localfile = File('repos/pardus-2007/system/base/curl/pspec.xml', File.read)
+  File "/usr/lib/python3.4/site-packages/pisi/file.py", line 205, in __init__
+    self.__file__ = open(localfile, access)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testLocalFile (filetest.FileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/filetest.py", line 26, in testLocalFile
+    f = File('repos/pardus-2007/system/base/curl/pspec.xml', File.read)
+  File "/usr/lib/python3.4/site-packages/pisi/file.py", line 205, in __init__
+    self.__file__ = open(localfile, access)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testMakeUri (filetest.FileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/filetest.py", line 12, in testMakeUri
+    spec = SpecFile("repos/pardus-2007/system/base/curl/pspec.xml")
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 334, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testRemoteRead (filetest.FileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/fetcher.py", line 145, in fetch
+    import urlgrabber
+ImportError: No module named 'urlgrabber'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/filetest.py", line 31, in testRemoteRead
+    f = File('http://www.pardus.org.tr/urunler/pardus-2009.2-Geronticus_eremita-surum-notlari-tr.html', File.read)
+  File "/usr/lib/python3.4/site-packages/pisi/file.py", line 193, in __init__
+    localfile = File.download(uri, transfer_dir, sha1sum, compress, sign)
+  File "/usr/lib/python3.4/site-packages/pisi/file.py", line 137, in download
+    pisi.fetcher.fetch_url(uri, transfer_dir, ctx.ui.Progress, tmpfile)
+  File "/usr/lib/python3.4/site-packages/pisi/fetcher.py", line 245, in fetch_url
+    fetch.fetch()
+  File "/usr/lib/python3.4/site-packages/pisi/fetcher.py", line 147, in fetch
+    raise FetchError(_('Urlgrabber needs to be installed to run this command'))
+pisi.fetcher.FetchError: Bu komutun çalıştırılabilmesi için Urlgrabber kurulu olmalı.
+
+======================================================================
+ERROR: testAddRemoveFiles (database.filesdbtest.FilesDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/filesdbtest.py", line 46, in testAddRemoveFiles
+    assert not self.filesdb.has_file("etc/pisi/pisi.conf")
+  File "/usr/lib/python3.4/site-packages/pisi/db/filesdb.py", line 35, in has_file
+    return hashlib.md5(path).digest() in self.filesdb
+TypeError: Unicode-objects must be encoded before hashing
+
+======================================================================
+ERROR: testGetFile (database.filesdbtest.FilesDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/filesdbtest.py", line 29, in testGetFile
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testHasFile (database.filesdbtest.FilesDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/filesdbtest.py", line 22, in testHasFile
+    assert not self.filesdb.has_file("usr/bin/ethtool")
+  File "/usr/lib/python3.4/site-packages/pisi/db/filesdb.py", line 35, in has_file
+    return hashlib.md5(path).digest() in self.filesdb
+TypeError: Unicode-objects must be encoded before hashing
+
+======================================================================
+ERROR: testSearchFile (database.filesdbtest.FilesDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/filesdbtest.py", line 64, in testSearchFile
+    assert not self.filesdb.search_file("ethtool")
+  File "/usr/lib/python3.4/site-packages/pisi/db/filesdb.py", line 41, in search_file
+    if self.has_file(term):
+  File "/usr/lib/python3.4/site-packages/pisi/db/filesdb.py", line 35, in has_file
+    return hashlib.md5(path).digest() in self.filesdb
+TypeError: Unicode-objects must be encoded before hashing
+
+======================================================================
+ERROR: testFiles (filestest.FilesTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/filestest.py", line 18, in testFiles
+    self.files.read('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testGetLatest (historytest.HistoryTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/historytest.py", line 15, in testGetLatest
+    history.read('history/001_upgrade.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 449, in read
+    self.decode(self.rootNode(), errs)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 343, in decode
+    decode_member(self, node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 557, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + str(name)))
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 701, in decode
+    obj.decode(node, errs, where)
+AttributeError: 'Operation' object has no attribute 'decode'
+
+======================================================================
+ERROR: testAddRemovePackage (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 75, in testAddRemovePackage
+    pisi.api.install(["ctorrent"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testAddRemovePackage (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testClearPending (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 96, in testClearPending
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testClearPending (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetFiles (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 55, in testGetFiles
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetFiles (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetInfo (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 61, in testGetInfo
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetInfo (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetPackage (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 26, in testGetPackage
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetPackage (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetReverseDependencies (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 68, in testGetReverseDependencies
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetReverseDependencies (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetVersion (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 47, in testGetVersion
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testGetVersion (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testHasPackage (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 33, in testHasPackage
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testHasPackage (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testListInstalled (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 39, in testListInstalled
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testListInstalled (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testMarkListPending (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 87, in testMarkListPending
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testMarkListPending (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testSearchPackage (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 108, in testSearchPackage
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testSearchPackage (database.installdbtest.InstallDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/installdbtest.py", line 23, in tearDown
+    pisi.api.remove(["ctorrent", "ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 450, in remove
+    pisi.db.historydb.HistoryDB().create_history("remove")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testRead (metadatatest.MetadataTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/metadatatest.py", line 11, in testRead
+    md.read("metadata.xml")
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 449, in read
+    self.decode(self.rootNode(), errs)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 343, in decode
+    decode_member(self, node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 557, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + str(name)))
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 701, in decode
+    obj.decode(node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 343, in decode
+    decode_member(self, node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 557, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + str(name)))
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 701, in decode
+    obj.decode(node, errs, where)
+AttributeError: 'Packager' object has no attribute 'decode'
+
+======================================================================
+ERROR: testVerify (metadatatest.MetadataTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/metadatatest.py", line 18, in testVerify
+    md = self.testRead()
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/metadatatest.py", line 11, in testRead
+    md.read("metadata.xml")
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 449, in read
+    self.decode(self.rootNode(), errs)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 343, in decode
+    decode_member(self, node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 557, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + str(name)))
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 701, in decode
+    obj.decode(node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 343, in decode
+    decode_member(self, node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 557, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + str(name)))
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 701, in decode
+    obj.decode(node, errs, where)
+AttributeError: 'Packager' object has no attribute 'decode'
+
+======================================================================
+ERROR: testWrite (metadatatest.MetadataTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/metadatatest.py", line 23, in testWrite
+    md = self.testRead()
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/metadatatest.py", line 11, in testRead
+    md.read("metadata.xml")
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 449, in read
+    self.decode(self.rootNode(), errs)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 343, in decode
+    decode_member(self, node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 557, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + str(name)))
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 701, in decode
+    obj.decode(node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 343, in decode
+    decode_member(self, node, errs, where)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 557, in decode
+    setattr(self, name, decode_a(node, errs, where + '.' + str(name)))
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 701, in decode
+    obj.decode(node, errs, where)
+AttributeError: 'Packager' object has no attribute 'decode'
+
+======================================================================
+ERROR: testGetPackage (database.packagedbtest.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/packagedbtest.py", line 23, in testGetPackage
+    pkg = self.packagedb.get_package("ncftp", "pardus-2007")
+  File "/usr/lib/python3.4/site-packages/pisi/db/packagedb.py", line 89, in get_package
+    pkg, repo = self.get_package_repo(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/packagedb.py", line 162, in get_package_repo
+    pkg, repo = self.pdb.get_item_repo(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 50, in get_item_repo
+    raise Exception(_("Repo item %s not found") % str(item))
+Exception: Depo elemanı ncftp bulunamadı.
+
+======================================================================
+ERROR: testGetPackageAndRepository (database.packagedbtest.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/packagedbtest.py", line 46, in testGetPackageAndRepository
+    pkg, repo = self.packagedb.get_package_repo("cpulimit")
+  File "/usr/lib/python3.4/site-packages/pisi/db/packagedb.py", line 162, in get_package_repo
+    pkg, repo = self.pdb.get_item_repo(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 50, in get_item_repo
+    raise Exception(_("Repo item %s not found") % str(item))
+Exception: Depo elemanı cpulimit bulunamadı.
+
+======================================================================
+ERROR: testGetReverseDependencies (database.packagedbtest.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/packagedbtest.py", line 56, in testGetReverseDependencies
+    pkg, dep = self.packagedb.get_rev_deps("openssl")[0]
+IndexError: list index out of range
+
+======================================================================
+ERROR: testGetVersion (database.packagedbtest.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/packagedbtest.py", line 38, in testGetVersion
+    version, release, build = self.packagedb.get_version("lynx", "contrib-2007")
+  File "/usr/lib/python3.4/site-packages/pisi/db/packagedb.py", line 156, in get_version
+    raise Exception(_('Package %s not found.') % name)
+Exception: Paket lynx bulunamadı.
+
+======================================================================
+ERROR: testWhichRepo (database.packagedbtest.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/packagedbtest.py", line 43, in testWhichRepo
+    assert self.packagedb.which_repo("lynx") == "contrib-2007"
+  File "/usr/lib/python3.4/site-packages/pisi/db/packagedb.py", line 168, in which_repo
+    return self.pdb.which_repo(name)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 40, in which_repo
+    raise Exception(_("%s not found in any repository.") % str(item))
+Exception: lynx hiçbir depoda bulunamadı.
+
+======================================================================
+ERROR: testInstalledPackageSatisfies (relationtest.RelationTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/relationtest.py", line 7, in testInstalledPackageSatisfies
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testInstalledPackageReplaced (replacetest.ReplaceTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/replacetest.py", line 7, in testInstalledPackageReplaced
+    pisi.api.install(["ethtool"])
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 69, in wrapper
+    ret = func(*__args,**__kw)
+  File "/usr/lib/python3.4/site-packages/pisi/api.py", line 465, in install
+    pisi.db.historydb.HistoryDB().create_history("install")
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 32, in create_history
+    self.history.create(operation)
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 115, in __getattr__
+    self.__init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/lazydb.py", line 110, in __init
+    self.init()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 22, in init
+    self.__logs = self.__generate_history()
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+======================================================================
+ERROR: testSystem (shelltest.ShellTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/shelltest.py", line 114, in testSystem
+    system('touch tests/systemtest')
+  File "/usr/lib/python3.4/site-packages/pisi/actionsapi/shelltools.py", line 252, in system
+    command = str.join(str.split(command))
+TypeError: descriptor 'join' requires a 'str' object but received a 'list'
+
+======================================================================
+ERROR: testFetch (srcarchivetest.SourceArchiveTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/srcarchivetest.py", line 8, in testFetch
+    spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 334, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testIscached (srcarchivetest.SourceArchiveTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/srcarchivetest.py", line 18, in testIscached
+    spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 334, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testUnpack (srcarchivetest.SourceArchiveTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/srcarchivetest.py", line 24, in testUnpack
+    spec = SpecFile('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 334, in initialize
+    self.read(uri, keepDoc, tmpDir)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testGetSourceFromPackage (database.sourcedbtest.SourceDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/sourcedbtest.py", line 52, in testGetSourceFromPackage
+    pkg = self.sourcedb.pkgtosrc("cracklib")
+  File "/usr/lib/python3.4/site-packages/pisi/db/sourcedb.py", line 116, in pkgtosrc
+    return self.psdb.get_item(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 53, in get_item
+    item, repo = self.get_item_repo(item, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 50, in get_item_repo
+    raise Exception(_("Repo item %s not found") % str(item))
+Exception: Depo elemanı cracklib bulunamadı.
+
+======================================================================
+ERROR: testGetSpec (database.sourcedbtest.SourceDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/sourcedbtest.py", line 35, in testGetSpec
+    spec = self.sourcedb.get_spec("ethtool")
+  File "/usr/lib/python3.4/site-packages/pisi/db/sourcedb.py", line 79, in get_spec
+    spec, repo = self.get_spec_repo(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/sourcedb.py", line 110, in get_spec_repo
+    src, repo = self.sdb.get_item_repo(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 50, in get_item_repo
+    raise Exception(_("Repo item %s not found") % str(item))
+Exception: Depo elemanı ethtool bulunamadı.
+
+======================================================================
+ERROR: testGetSpecAndRepository (database.sourcedbtest.SourceDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/sourcedbtest.py", line 45, in testGetSpecAndRepository
+    spec, repo = self.sourcedb.get_spec_repo("ethtool")
+  File "/usr/lib/python3.4/site-packages/pisi/db/sourcedb.py", line 110, in get_spec_repo
+    src, repo = self.sdb.get_item_repo(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 50, in get_item_repo
+    raise Exception(_("Repo item %s not found") % str(item))
+Exception: Depo elemanı ethtool bulunamadı.
+
+======================================================================
+ERROR: testGetSpecOfRepository (database.sourcedbtest.SourceDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/sourcedbtest.py", line 40, in testGetSpecOfRepository
+    spec = self.sourcedb.get_spec("ethtool", "pardus-2007-src")
+  File "/usr/lib/python3.4/site-packages/pisi/db/sourcedb.py", line 79, in get_spec
+    spec, repo = self.get_spec_repo(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/sourcedb.py", line 110, in get_spec_repo
+    src, repo = self.sdb.get_item_repo(name, repo)
+  File "/usr/lib/python3.4/site-packages/pisi/db/itembyrepo.py", line 50, in get_item_repo
+    raise Exception(_("Repo item %s not found") % str(item))
+Exception: Depo elemanı ethtool bulunamadı.
+
+======================================================================
+ERROR: testCopy (specfiletests.SpecFileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/specfiletests.py", line 9, in setUp
+    self.spec.read('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testGetSourceRelease (specfiletests.SpecFileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/specfiletests.py", line 9, in setUp
+    self.spec.read('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testGetSourceVersion (specfiletests.SpecFileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/specfiletests.py", line 9, in setUp
+    self.spec.read('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testVerify (specfiletests.SpecFileTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/specfiletests.py", line 9, in setUp
+    self.spec.read('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadı (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testOpsCharacters (versiontest.VersionTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/versiontest.py", line 66, in testOpsCharacters
+    self.assertTrue(v1 > v2)
+  File "/usr/lib/python3.4/site-packages/pisi/version.py", line 107, in __gt__
+    return self.__version > rhs.__version
+TypeError: unorderable types: str() > NoneType()
+
+======================================================================
+FAIL: testHasComponent (database.componentdbtest.ComponentDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/componentdbtest.py", line 23, in testHasComponent
+    assert self.componentdb.has_component("system.base", "pardus-2007")
+AssertionError
+
+======================================================================
+FAIL: testListComponents (database.componentdbtest.ComponentDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/componentdbtest.py", line 31, in testListComponents
+    "applications", "applications.network"])
+AssertionError
+
+======================================================================
+FAIL: testSearchComponent (database.componentdbtest.ComponentDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/componentdbtest.py", line 79, in testSearchComponent
+    assert set(packages) == set(['applications', 'applications.network', 'applications.util'])
+AssertionError
+
+======================================================================
+FAIL: testItemRepos (database.itembyrepotest.ItemByRepoTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/itembyrepotest.py", line 73, in testItemRepos
+    assert db.item_repos() == ['pardus-2007', 'contrib-2007', 'pardus-2007-src']
+AssertionError
+
+======================================================================
+FAIL: testGetObsoletes (database.packagedbtest.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/packagedbtest.py", line 51, in testGetObsoletes
+    assert set(self.packagedb.get_obsoletes("pardus-2007")) == set(["wengophone", "rar"])
+AssertionError
+
+======================================================================
+FAIL: testHasPackage (database.packagedbtest.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/packagedbtest.py", line 33, in testHasPackage
+    assert self.packagedb.has_package("ncftp", "pardus-2007")
+AssertionError
+
+======================================================================
+FAIL: testListPackages (database.packagedbtest.PackageDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/packagedbtest.py", line 68, in testListPackages
+    'curl', 'gsl', 'bash', 'cracklib'])
+AssertionError
+
+======================================================================
+FAIL: testGetBinaryRepos (database.repodbtest.RepoDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/repodbtest.py", line 49, in testGetBinaryRepos
+    assert set(self.repodb.get_binary_repos()) == set(['pardus-2007', 'contrib-2007'])
+AssertionError
+
+======================================================================
+FAIL: testGetSourceRepos (database.repodbtest.RepoDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/repodbtest.py", line 46, in testGetSourceRepos
+    assert set(self.repodb.get_source_repos()) == set(['pardus-2007-src'])
+AssertionError
+
+======================================================================
+FAIL: testListRepos (database.repodbtest.RepoDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/repodbtest.py", line 43, in testListRepos
+    assert set(self.repodb.list_repos()) == set(['pardus-2007', 'contrib-2007', 'pardus-2007-src'])
+AssertionError
+
+======================================================================
+FAIL: testRepoOrder (database.repodbtest.RepoDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/repodbtest.py", line 58, in testRepoOrder
+    assert repoorder.get_order() == ['pardus-2007', 'contrib-2007', 'pardus-2007-src']
+AssertionError
+
+======================================================================
+FAIL: testIsLink (shelltest.ShellTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/shelltest.py", line 80, in testIsLink
+    assert isLink('tests/history')
+AssertionError
+
+======================================================================
+FAIL: testSym (shelltest.ShellTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/shelltest.py", line 47, in testSym
+    self.assertEqual(os.path.islink('tests/repos'),True)
+AssertionError: False != True
+
+======================================================================
+FAIL: testUnlinkDir (shelltest.ShellTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/shelltest.py", line 56, in testUnlinkDir
+    self.assertEqual(os.path.islink('tests/history'), True)
+AssertionError: False != True
+
+======================================================================
+FAIL: testHasSpec (database.sourcedbtest.SourceDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/sourcedbtest.py", line 31, in testHasSpec
+    assert self.sourcedb.has_spec("ethtool")
+AssertionError
+
+======================================================================
+FAIL: testListSources (database.sourcedbtest.SourceDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/sourcedbtest.py", line 28, in testListSources
+    'bash', 'cracklib'])
+AssertionError
+
+======================================================================
+FAIL: testSearchPackage (database.sourcedbtest.SourceDBTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/database/sourcedbtest.py", line 57, in testSearchPackage
+    assert set(["openssl"]) == set(packages)
+AssertionError
+
+======================================================================
+FAIL: testRunBatch (utiltest.UtilTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/utiltest.py", line 13, in testRunBatch
+    assert (0, '', '') == run_batch('cd')
+AssertionError
+
+----------------------------------------------------------------------
+Ran 140 tests in 5.890s
+
+FAILED (failures=18, errors=73)

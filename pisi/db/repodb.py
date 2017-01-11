@@ -211,7 +211,7 @@ class RepoDB(lazydb.LazyDB):
         temp = []
         for x in self.repoorder.get_order():
             if not only_active:
-                temp.append[x]
+                temp.append(x)
             elif self.repo_active(x) == True:
                 temp.append(x)
         return temp 

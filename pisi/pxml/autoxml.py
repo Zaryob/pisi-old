@@ -687,7 +687,7 @@ class autoxml(oo.autosuper, oo.autoprop):
 
         def make_object():
             obj = tag_type.__new__(tag_type)
-            obj.__init__(tag=tag, req=req)
+            obj.__init__()
             return obj
 
         def init():

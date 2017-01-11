@@ -1,0 +1,96 @@
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 690, in make_object
+    obj.__init__(tag=tag, req=req)
+TypeError: object.__init__() takes no parameters
+
+  File "/usr/lib/python3.4/site-packages/pisi/db/repodb.py", line 148, in has_repo
+    return name in self.list_repos(only_active=False)
+TypeError: argument of type 'NoneType' is not iterable
+
+  File "/usr/lib/python3.4/site-packages/pisi/db/packagedb.py", line 42, in init
+    for repo in repodb.list_repos():
+TypeError: 'NoneType' object is not iterable
+
+  File "/usr/lib/python3.4/site-packages/pisi/db/historydb.py", line 27, in __generate_history
+    logs.sort(lambda x,y:int(x.split("_")[0]) - int(y.split("_")[0]))
+TypeError: must use keyword argument for key function
+
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/filetest.py", line 17, in testChooseMethod
+    compress = File('repos/contrib-2007/pisi-index.xml', File.read)
+  File "/usr/lib/python3.4/site-packages/pisi/file.py", line 205, in __init__
+    self.__file__ = file(localfile, access)
+NameError: name 'file' is not defined
+
+======================================================================
+ERROR: testFiles (filestest.FilesTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 84, in readxml
+    self.doc = iks.parse(localpath)
+FileNotFoundError: [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/filestest.py", line 18, in testFiles
+    self.files.read('repos/pardus-2007/system/base/curl/pspec.xml')
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/autoxml.py", line 443, in read
+    compress=compress, sign=sign, copylocal=copylocal)
+  File "/usr/lib/python3.4/site-packages/pisi/pxml/xmlfile.py", line 87, in readxml
+    raise Error(_("Unable to read file (%s): %s") %(localpath,e))
+pisi.pxml.xmlfile.Error: Dosya okunamadý (repos/pardus-2007/system/base/curl/pspec.xml): [Errno 2] No such file or directory: 'repos/pardus-2007/system/base/curl/pspec.xml'
+
+======================================================================
+ERROR: testOpsCharacters (versiontest.VersionTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/versiontest.py", line 66, in testOpsCharacters
+    self.assertTrue(v1 > v2)
+  File "/usr/lib/python3.4/site-packages/pisi/version.py", line 107, in __gt__
+    return self.__version > rhs.__version
+TypeError: unorderable types: str() > NoneType()
+
+======================================================================
+FAIL: testCanAccessDirectory (shelltest.ShellTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/shelltest.py", line 21, in testCanAccessDirectory
+    assert can_access_directory('/boot')
+AssertionError
+
+======================================================================
+FAIL: testIsLink (shelltest.ShellTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/shelltest.py", line 80, in testIsLink
+    assert isLink('tests/history')
+AssertionError
+
+======================================================================
+FAIL: testSym (shelltest.ShellTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/shelltest.py", line 47, in testSym
+    self.assertEqual(os.path.islink('tests/repos'),True)
+AssertionError: False != True
+
+======================================================================
+FAIL: testUnlinkDir (shelltest.ShellTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/shelltest.py", line 56, in testUnlinkDir
+    self.assertEqual(os.path.islink('tests/history'), True)
+AssertionError: False != True
+
+======================================================================
+FAIL: testRunBatch (utiltest.UtilTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/suleyman/YAZILIM/AquilaNipalensis/package-manager/tests/utiltest.py", line 13, in testRunBatch
+    assert (0, '', '') == run_batch('cd')
+AssertionError
+
+----------------------------------------------------------------------
+Ran 140 tests in 45.496s
+
+FAILED (failures=5, errors=90)
+
